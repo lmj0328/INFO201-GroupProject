@@ -32,6 +32,10 @@ joinedData <- filteredData %>%
   left_join(counties, by = "county_name") %>%
   filter(state_name =="Washington")
 
+WashingtonState <- RawData %>%
+  filter(STATE == "WA") %>%
+  filter(COUNTYNAME == "Washington")
+
 graph1 <- ggplot(joinedData, aes(long, lat, group = group, fill = A06500, label = A06500)) +
   geom_polygon(color = "#ffffff", size = 0.05) +
   coord_map(projection = "albers", lat0 = 39, lat1 = 45) + 
