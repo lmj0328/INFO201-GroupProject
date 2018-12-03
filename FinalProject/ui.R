@@ -71,16 +71,35 @@ shinyUI(tagList(
       )
     ),
     
-    
     tabPanel(
-      "Jim", 
+      "Washington Poverty Data (Jim)", 
       sidebarPanel(
-        # copy&paste your code here
+        selectInput("selectPovYear", label = h3("Select Your Interested Year"), 
+                    choices = list("2012" = 2012, 
+                                   "2013" = 2013, 
+                                   "2014" = 2014, 
+                                   "2015" = 2015, 
+                                   "2016" = 2016), 
+                    selected = 2012)
       ),
       
       mainPanel(
-        # copy&paste your code here
+        tabsetPanel(
+          tabPanel(
+            "Intro",
+            h3("Poverty Data for Washington"),
+            h5("Description")
+          ),
+          
+          tabPanel(
+            "Map Plot", 
+            plotOutput("yearPOV",  width = "100%")
+          ),
+          
+          tabPanel("Histogram Plot", "This panel is intentionally left blank")
+        )
+      )
       )
     )
   )
-))
+)
