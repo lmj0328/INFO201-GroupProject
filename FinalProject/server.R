@@ -36,13 +36,19 @@ shinyServer(
       
       
       filteredPOVData <- wa_poverty_final_data %>% 
-        filter(Year == input$selectPovYear)
+          filter(Year == input$selectPovYear)
+     
+      
       
       ggplot(filteredPOVData, aes(long, lat, group = group, fill = Percent)) +
         geom_polygon(color = "#ffffff", size = 0.05) +
         coord_map(projection = "albers", lat0 = 39, lat1 = 45) + 
         labs(fill = "% Below Poverty Line") + 
         scale_fill_gradientn(colours = terrain.colors(7))
+    })
+    output$povertyTable <-  DT::renderDataTable({
+      data <- wa_poverty_data[, c("county_name", "Percent", "Year")]
+      DT::datatable(data, options = list(lengthMenu = c(9, 17, 25), pageLength = 9), rownames=FALSE)
     })
     
     
