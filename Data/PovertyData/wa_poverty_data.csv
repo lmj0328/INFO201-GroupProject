@@ -1,0 +1,236 @@
+"","county_name","Percent","Year"
+"1","Adams County",24.5,2011
+"2","Asotin County",14.6,2011
+"3","Benton County",12.2,2011
+"4","Chelan County",12.6,2011
+"5","Clallam County",13.6,2011
+"6","Clark County",11.7,2011
+"7","Columbia County",15.4,2011
+"8","Cowlitz County",17.5,2011
+"9","Douglas County",16.7,2011
+"10","Ferry County",20.8,2011
+"11","Franklin County",20.9,2011
+"12","Garfield County",12.9,2011
+"13","Grant County",20,2011
+"14","Grays Harbor County",17,2011
+"15","Island County",8.3,2011
+"16","Jefferson County",13.2,2011
+"17","King County",10.5,2011
+"18","Kitsap County",9.8,2011
+"19","Kittitas County",22.3,2011
+"20","Klickitat County",18.6,2011
+"21","Lewis County",13.5,2011
+"22","Lincoln County",11.5,2011
+"23","Mason County",16.3,2011
+"24","Okanogan County",21.4,2011
+"25","Pacific County",18,2011
+"26","Pend Oreille County",19.8,2011
+"27","Pierce County",11.6,2011
+"28","San Juan County",11.1,2011
+"29","Skagit County",12,2011
+"30","Skamania County",11.1,2011
+"31","Snohomish County",9.3,2011
+"32","Spokane County",14.4,2011
+"33","Stevens County",16.1,2011
+"34","Thurston County",10.5,2011
+"35","Wahkiakum County",16.6,2011
+"36","Walla Walla County",18.2,2011
+"37","Whatcom County",15.2,2011
+"38","Whitman County",30.3,2011
+"39","Yakima County",21.4,2011
+"40","Adams County",22.9,2013
+"41","Asotin County",13.6,2013
+"42","Benton County",12.8,2013
+"43","Chelan County",13.2,2013
+"44","Clallam County",14.6,2013
+"45","Clark County",12.4,2013
+"46","Columbia County",17.1,2013
+"47","Cowlitz County",17.6,2013
+"48","Douglas County",15.8,2013
+"49","Ferry County",20.7,2013
+"50","Franklin County",20.2,2013
+"51","Garfield County",12.1,2013
+"52","Grant County",20.3,2013
+"53","Grays Harbor County",19,2013
+"54","Island County",9,2013
+"55","Jefferson County",13.3,2013
+"56","King County",11.5,2013
+"57","Kitsap County",10.4,2013
+"58","Kittitas County",22.6,2013
+"59","Klickitat County",17.5,2013
+"60","Lewis County",15.4,2013
+"61","Lincoln County",14.2,2013
+"62","Mason County",17.3,2013
+"63","Okanogan County",20.7,2013
+"64","Pacific County",17.2,2013
+"65","Pend Oreille County",20.4,2013
+"66","Pierce County",12.4,2013
+"67","San Juan County",10.8,2013
+"68","Skagit County",13.5,2013
+"69","Skamania County",12.5,2013
+"70","Snohomish County",10.4,2013
+"71","Spokane County",15.4,2013
+"72","Stevens County",16.5,2013
+"73","Thurston County",11.7,2013
+"74","Wahkiakum County",22.6,2013
+"75","Walla Walla County",17.8,2013
+"76","Whatcom County",16.4,2013
+"77","Whitman County",32.6,2013
+"78","Yakima County",22.6,2013
+"79","Washington",13.5,2014
+"80","Adams County",23.3,2014
+"81","Asotin County",15.3,2014
+"82","Benton County",13.7,2014
+"83","Chelan County",14.8,2014
+"84","Clallam County",15.1,2014
+"85","Clark County",11.8,2014
+"86","Columbia County",17.5,2014
+"87","Cowlitz County",18.4,2014
+"88","Douglas County",15.7,2014
+"89","Ferry County",22.8,2014
+"90","Franklin County",19.6,2014
+"91","Garfield County",12.4,2014
+"92","Grant County",19.4,2014
+"93","Grays Harbor County",18.8,2014
+"94","Island County",9.8,2014
+"95","Jefferson County",12.6,2014
+"96","King County",11.8,2014
+"97","Kitsap County",10.9,2014
+"98","Kittitas County",22.1,2014
+"99","Klickitat County",15.6,2014
+"100","Lewis County",16.8,2014
+"101","Lincoln County",13.4,2014
+"102","Mason County",17.1,2014
+"103","Okanogan County",21.7,2014
+"104","Pacific County",17.1,2014
+"105","Pend Oreille County",21.9,2014
+"106","Pierce County",12.6,2014
+"107","San Juan County",11.4,2014
+"108","Skagit County",14.9,2014
+"109","Skamania County",13.6,2014
+"110","Snohomish County",10.3,2014
+"111","Spokane County",15.6,2014
+"112","Stevens County",17.6,2014
+"113","Thurston County",11.9,2014
+"114","Wahkiakum County",21.9,2014
+"115","Walla Walla County",16.7,2014
+"116","Whatcom County",16.2,2014
+"117","Whitman County",32.7,2014
+"118","Yakima County",22.5,2014
+"119","Adams County",21.4,2015
+"120","Asotin County",15.2,2015
+"121","Benton County",14.2,2015
+"122","Chelan County",14.3,2015
+"123","Clallam County",15,2015
+"124","Clark County",11.2,2015
+"125","Columbia County",17.6,2015
+"126","Cowlitz County",17.5,2015
+"127","Douglas County",14.8,2015
+"128","Ferry County",22,2015
+"129","Franklin County",18.3,2015
+"130","Garfield County",11.5,2015
+"131","Grant County",17.9,2015
+"132","Grays Harbor County",18.1,2015
+"133","Island County",9.6,2015
+"134","Jefferson County",12,2015
+"135","King County",11.2,2015
+"136","Kitsap County",10.6,2015
+"137","Kittitas County",22.2,2015
+"138","Klickitat County",15.2,2015
+"139","Lewis County",16.3,2015
+"140","Lincoln County",15.3,2015
+"141","Mason County",17.2,2015
+"142","Okanogan County",21.2,2015
+"143","Pacific County",19.2,2015
+"144","Pend Oreille County",21.5,2015
+"145","Pierce County",12.7,2015
+"146","San Juan County",11.6,2015
+"147","Skagit County",16,2015
+"148","Skamania County",13.7,2015
+"149","Snohomish County",10.2,2015
+"150","Spokane County",15.9,2015
+"151","Stevens County",18,2015
+"152","Thurston County",12.4,2015
+"153","Wahkiakum County",17.1,2015
+"154","Walla Walla County",17.6,2015
+"155","Whatcom County",16,2015
+"156","Whitman County",31.2,2015
+"157","Yakima County",21.3,2015
+"158","Adams County",23,2016
+"159","Asotin County",14.5,2016
+"160","Benton County",13.9,2016
+"161","Chelan County",12.6,2016
+"162","Clallam County",15.7,2016
+"163","Clark County",10.2,2016
+"164","Columbia County",14.8,2016
+"165","Cowlitz County",16.9,2016
+"166","Douglas County",13.4,2016
+"167","Ferry County",23.5,2016
+"168","Franklin County",16.4,2016
+"169","Garfield County",11.3,2016
+"170","Grant County",16.9,2016
+"171","Grays Harbor County",16.6,2016
+"172","Island County",9.5,2016
+"173","Jefferson County",12,2016
+"174","King County",10.7,2016
+"175","Kitsap County",10.4,2016
+"176","Kittitas County",20.9,2016
+"177","Klickitat County",15.7,2016
+"178","Lewis County",16.3,2016
+"179","Lincoln County",14.8,2016
+"180","Mason County",17,2016
+"181","Okanogan County",21.2,2016
+"182","Pacific County",18.7,2016
+"183","Pend Oreille County",19.8,2016
+"184","Pierce County",12.7,2016
+"185","San Juan County",11.1,2016
+"186","Skagit County",15,2016
+"187","Skamania County",14.3,2016
+"188","Snohomish County",9.3,2016
+"189","Spokane County",15.6,2016
+"190","Stevens County",16.5,2016
+"191","Thurston County",12,2016
+"192","Wahkiakum County",14.1,2016
+"193","Walla Walla County",16.5,2016
+"194","Whatcom County",16,2016
+"195","Whitman County",30,2016
+"196","Yakima County",20.5,2016
+"197","Adams County",23.1,2012
+"198","Asotin County",13.7,2012
+"199","Benton County",12.9,2012
+"200","Chelan County",12.8,2012
+"201","Clallam County",13.5,2012
+"202","Clark County",12,2012
+"203","Columbia County",13.2,2012
+"204","Cowlitz County",17.9,2012
+"205","Douglas County",16.5,2012
+"206","Ferry County",20.5,2012
+"207","Franklin County",21.5,2012
+"208","Garfield County",9.7,2012
+"209","Grant County",20.1,2012
+"210","Grays Harbor County",18.6,2012
+"211","Island County",8.8,2012
+"212","Jefferson County",13.7,2012
+"213","King County",10.9,2012
+"214","Kitsap County",10.4,2012
+"215","Kittitas County",21.8,2012
+"216","Klickitat County",19.1,2012
+"217","Lewis County",13.9,2012
+"218","Lincoln County",14.4,2012
+"219","Mason County",17.4,2012
+"220","Okanogan County",20.6,2012
+"221","Pacific County",18.1,2012
+"222","Pend Oreille County",22.2,2012
+"223","Pierce County",11.9,2012
+"224","San Juan County",11.2,2012
+"225","Skagit County",12.6,2012
+"226","Skamania County",12.4,2012
+"227","Snohomish County",9.8,2012
+"228","Spokane County",14.8,2012
+"229","Stevens County",16.6,2012
+"230","Thurston County",11.1,2012
+"231","Wahkiakum County",16,2012
+"232","Walla Walla County",17.8,2012
+"233","Whatcom County",15.8,2012
+"234","Whitman County",32.3,2012
+"235","Yakima County",22.3,2012
