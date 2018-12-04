@@ -181,8 +181,18 @@ shinyServer(
       
       return(plot)
     })
-
-    
-    ## Put ur codes here.
+      #HOUSING PLOT
+      output$distPlot <- renderPlot({
+        select_data <- read.csv(paste0("../Data/OORHousingData/", input$yearSelect,"-", input$bdrmSelect, ".csv"))
+        select_data$monthly_rent <- as.numeric(gsub("[^0-9.]", "",select_data$monthly_rent))
+        plot <- ggplot(select_data, aes(x = reorder(COUNTY, -monthly_rent), y = monthly_rent, 
+                                        fill = monthly_rent)) +
+          geom_bar(stat = "identity") + theme_minimal() +
+          theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+          scale_fill_gradient(low = "green", high = "red") +
+          labs(x = "County", y = "Monthly Rent (USD)", title = paste0(input$bdrmSelect, " monthly rent by counties in Washington in ", input$yearSelect))
+        print(plot)
+      })
+      
   }
 )

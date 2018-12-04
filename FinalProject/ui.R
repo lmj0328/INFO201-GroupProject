@@ -140,13 +140,31 @@ shinyUI(tagList(
     ),   
     
     tabPanel(
-      "Cindy & Jennifer", 
+      "Statistics of Monthly Housing payment (Cindy & Jennifer)", 
       sidebarPanel(
-        # copy&paste your code here
+        ## SELECTBOX FOR BEDROOM
+        selectInput("bdrmSelect",
+                    label = "Select interested type of unit",
+                    choices = list ("0 bedroom" = "0_bedroom", 
+                                    "1 bedroom" = "1_bedroom",
+                                    "2 bedroom" = "2_bedroom",
+                                    "3 bedroom" = "3_bedroom",
+                                    "4 bedroom" = "4_bedroom")),
+        ## SELECTBOX FOR YEAR
+        selectInput("yearSelect",
+                    label = "Select interested year",
+                    choices = list ("2011" = 2011,
+                                    "2012" = 2012,
+                                    "2013" = 2013,
+                                    "2014" = 2014,
+                                    "2015" = 2015,
+                                    "2016" = 2016)
+                    
+        )
       ),
       
       mainPanel(
-        # copy&paste your code here
+        plotOutput("distPlot")
       )
     ),
     
