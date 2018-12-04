@@ -8,7 +8,8 @@ library(urbnmapr)
 source("../Script/ReadData.R")
 
 shinyServer(
-  function(input, output) {
+  function(input, output, session) {
+    
     ## Mengjiao's Code
 
     ## Render Map's Plot
@@ -19,11 +20,6 @@ shinyServer(
         filter(STATE == "WA") %>%
         filter(COUNTYNAME != "Washington") %>%
         filter(agi_stub == input$selectSalary)
-      
-      # Render Table
-      # output$yearSalaryChart <- renderTable({
-      #   head(filteredData, n = filteredData$N1)
-      # })
   
       colnames(filteredData)[4] <- "county_name" 
       filteredData$county_name <- as.character(filteredData$county_name)
@@ -35,12 +31,22 @@ shinyServer(
       datasetInput <- reactive({
         switch(input$selectDataset,
                "N1" = joinedData$N1,
-               "A06500" = joinedData$A06500,
                "A04800" = joinedData$A04800,
-               "A11901" = joinedData$A11901,
                "A00200" = joinedData$A00200)
       })
+      
 
+
+      output$chosedRange <- renderText(
+        if(input$selectDataset == "N1") {
+          paste("You have chosen to display a range of Number of Returns from", input$rangeSlider[1], "to", input$rangeSlider[2], ".")
+        } else if (input$selectDataset == "A04800") {
+          paste("You have chosen to display a range of Taxable Income Amount from", input$rangeSlider[1], "to", input$rangeSlider[2], ".")
+        } else if (input$selectDataset == "A00200") {
+          paste("You have chosen to display a range of Salaries and Wages Amount from", input$rangeSlider[1], "to", input$rangeSlider[2], ".")
+        }
+      )
+      
       # Map's Code
       ggplot(joinedData, aes(long, lat, group = group, fill = datasetInput())) +
         geom_polygon(color = "#ffffff", size = 0.05) +
@@ -50,20 +56,33 @@ shinyServer(
                              limits=c(input$rangeSlider[1], input$rangeSlider[2]))
     })
     
+    # Chart's Code
+    output$chartTable <- DT::renderDataTable({
+      RawData <- read.csv(paste0("../Data/SOITaxData/", input$selectYear, ".csv"))
+      
+      filteredData <- RawData %>%
+        filter(STATE == "WA") %>%
+        filter(COUNTYNAME != "Washington") %>%
+        filter(agi_stub == input$selectSalary) 
+      
+      renameData <- filteredData %>%
+        select(STATE, COUNTYNAME, N1, A04800, A00200)
+      
+      colnames(renameData)[3] <- "Number of Returns" 
+      colnames(renameData)[4] <- "Taxable Income Amount" 
+      colnames(renameData)[5] <- "Salaries and Wages Amount" 
+      
+      DT::datatable(renameData, options = list(orderClasses = TRUE, paging = FALSE, searching = FALSE))
+    })
+    
     #Display selected Choice
     output$chosedDataset <- renderText(
       if(input$selectDataset == "N1") {
         paste("You have chosen to display data from 'Number of Returns'. 
               The map's color will be based on the amount of people. ")
-      } else if (input$selectDataset == "A06500") {
-        paste("You have chosen to display data from 'Income Tax Amount'.  
-              The map will indicate the amount of income tax peopel have to pay. ")
       } else if (input$selectDataset == "A04800") {
         paste("You have chosen to display data from 'Taxable Income Amount'.  
               The map will indicate the amount of income that are taxable. ")
-      } else if (input$selectDataset == "A11901") {
-        paste("You have chosen to display data from 'Tax Due at Time of Filing'.  
-              The map will indicate the amount of tax people have to pay at time of filing")
       } else if (input$selectDataset == "A00200") {
         paste("You have chosen to display data from 'Salaries and Wages Amount'.
               The map will indicate the amount of salaries and wages. ")
@@ -75,58 +94,72 @@ shinyServer(
     )
     
     output$chosedSalary <- renderText(
-      paste("You have chosen to people who have salaries from ", input$selectSalary, ".")
-    )
-    
-    output$chosedRange <- renderText(
-      paste("You have chosen to display a range of", input$rangeSlider[1], "to", input$rangeSlider[2], ".")
-    )
-    
-    
-    output$yearPlot <- renderPlot(
-      {
-        RawData <- read.csv(paste0("../Data/SOITaxData/", input$selectYear, ".csv"))
-        
-        WashingtonState <- RawData %>%
-          filter(STATE == "WA") %>%
-          filter(COUNTYNAME == "Washington")
-        
-        salaryList <- list("$1 under $10,000",
-                           "$10,000 under $25,000",
-                           "$25,000 under $50,000",
-                           "$50,000 under $75,000",
-                           "$75,000 under $100,000",
-                           "$100,000 under $200,000",
-                           "$200,000 or more")
-        
-        output$yearInfo <- renderText(
-          {
-            if(input$selectSalary == 2) {
-              salary <- "$1 under $10,000"
-            } else if (input$selectSalary == 3) {
-              salary <- "$10,000 under $25,000"
-            } else if (input$selectSalary == 4) {
-              salary <- "$25,000 under $50,000"
-            } else if (input$selectSalary == 5) {
-              salary <- "$50,000 under $75,000"
-            } else if (input$selectSalary == 6) {
-              salary <- "$75,000 under $100,000"
-            } else if (input$selectSalary == 6) {
-              salary <- "$75,000 under $100,000"
-            } else if (input$selectSalary == 6) {
-              salary <- "$100,000 under $200,000"
-            } else if (input$selectSalary == 6) {
-              salary <- "$200,000 or more"
-            }
-            
-            paste0("In ", input$selectYear, ", there are a total of ", WashingtonState$N1, " people earned ", salaryList, ".")
-          }
-        )
+      if(input$selectSalary == 2) {
+        paste("You have chosen people who have salaries from $1 to $10,000.")
+      } else if (input$selectSalary == 3) {
+        paste("You have chosen people who have salaries from $10,000 to $25,000.")
+      } else if (input$selectSalary == 4) {
+        paste("You have chosen people who have salaries from $25,000 to $50,000.")
+      } else if (input$selectSalary == 5) {
+        paste("You have chosen people who have salaries from $50,000 to $75,000.")
+      } else if (input$selectSalary == 6) {
+        paste("You have chosen people who have salaries from $75,000 to $100,000.")
+      } else if (input$selectSalary == 7) {
+        paste("You have chosen people who have salaries from $100,000 to $200,000.")
+      } else if (input$selectSalary == 7) {
+        paste("You have chosen people who have salaries from $200,000 to more.")
       }
     )
     
+    # observe code for county's action button
+    observe({
+      if (input$UncheckCounty > 0) {
+        if (input$UncheckCounty %% 2 == 0){
+          updateCheckboxGroupInput(session=session,
+                                   inputId="selectCounty",
+                                   choices = ListOfCounties$COUNTYNAME,
+                                   selected = ListOfCounties$COUNTYNAME)
+          
+        } else {
+          updateCheckboxGroupInput(session=session,
+                                   inputId="selectCounty",
+                                   choices = ListOfCounties$COUNTYNAME,
+                                   selected = "")
+        }
+      }
+    })
     
-  
+    # observe code for year's action button
+    observe({
+      if (input$UncheckYear > 0) {
+        if (input$UncheckYear %% 2 == 0){
+          updateCheckboxGroupInput(session=session,
+                                   inputId="selectYear2",
+                                   choices = listOfYear,
+                                   selected = listOfYear)
+          
+        } else {
+          updateCheckboxGroupInput(session=session,
+                                   inputId="selectYear2",
+                                   choices = listOfYear,
+                                   selected = "")
+          
+        }
+      }
+    })
+    
+    
+    output$yearPlot <- renderPlot({
+      BarPlot %>% filter(Shape %in% input$checkGroup)
+      
+      
+      # Render a barplot
+      barplot(WorldPhones[,input$region]*1000, 
+              main=input$region,
+              ylab="Number of Telephones",
+              xlab="Year")
+    })
+    
     ## Put ur codes here.
   }
 )
