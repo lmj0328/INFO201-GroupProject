@@ -12,7 +12,7 @@ shinyServer(
     
     ## Mengjiao's Code
 
-    ## Render Map's Plot
+    # OUTPUT MAP FOR PANEL 3
     output$yearSalary <- renderPlot({
       RawData <- read.csv(paste0("../Data/SOITaxData/", input$selectYear, ".csv"))
       
@@ -28,6 +28,7 @@ shinyServer(
         left_join(counties, by = "county_name") %>% 
         filter(state_name =="Washington")
       
+      # ADD REACTIVE FUNCTION FOR DATASET
       datasetInput <- reactive({
         switch(input$selectDataset,
                "N1" = joinedData$N1,
@@ -35,8 +36,7 @@ shinyServer(
                "A00200" = joinedData$A00200)
       })
       
-
-
+      # OUTPUT SELECTED RANGE FOR PANEL 3
       output$chosedRange <- renderText(
         if(input$selectDataset == "N1") {
           paste("You have chosen to display a range of Number of Returns from", input$rangeSlider[1], "to", input$rangeSlider[2], ".")
@@ -47,7 +47,6 @@ shinyServer(
         }
       )
       
-      # Map's Code
       ggplot(joinedData, aes(long, lat, group = group, fill = datasetInput())) +
         geom_polygon(color = "#ffffff", size = 0.05) +
         coord_map(projection = "albers", lat0 = 39, lat1 = 45) + 
@@ -56,7 +55,7 @@ shinyServer(
                              limits=c(input$rangeSlider[1], input$rangeSlider[2]))
     })
     
-    # Chart's Code
+    # OUTPUT DATA TABLE FOR PANEL 3
     output$chartTable <- DT::renderDataTable({
       RawData <- read.csv(paste0("../Data/SOITaxData/", input$selectYear, ".csv"))
       
@@ -75,7 +74,7 @@ shinyServer(
       DT::datatable(renameData, options = list(orderClasses = TRUE, paging = FALSE, searching = FALSE))
     })
     
-    #Display selected Choice
+    # OUTPUT SELECT DATASET FOR PANEL 3
     output$chosedDataset <- renderText(
       if(input$selectDataset == "N1") {
         paste("You have chosen to display data from 'Number of Returns'. 
@@ -89,10 +88,12 @@ shinyServer(
       }
     )
     
+    # OUTPUT SELECT YEAR FOR PANEL 3
     output$chosedYear <- renderText(
       paste("You have chosen to display data from", input$selectYear, ".")
     )
     
+    # OUTPUT SELECT SALARY FOR PANEL 3
     output$chosedSalary <- renderText(
       if(input$selectSalary == 2) {
         paste("You have chosen people who have salaries from $1 to $10,000.")
@@ -111,7 +112,7 @@ shinyServer(
       }
     )
     
-    # observe code for county's action button
+    # OBSERVE COUNTY'S ACTION BUTTON FOR PANEL 2
     observe({
       if (input$UncheckCounty > 0) {
         if (input$UncheckCounty %% 2 == 0){
@@ -128,29 +129,10 @@ shinyServer(
         }
       }
     })
-    
-    # # observe code for year's action button
-    # observe({
-    #   if (input$UncheckYear > 0) {
-    #     if (input$UncheckYear %% 2 == 0){
-    #       updateCheckboxGroupInput(session=session,
-    #                                inputId="selectYear2",
-    #                                choices = listOfYear,
-    #                                selected = listOfYear)
-    #       
-    #     } else {
-    #       updateCheckboxGroupInput(session=session,
-    #                                inputId="selectYear2",
-    #                                choices = listOfYear,
-    #                                selected = "")
-    #       
-    #     }
-    #   }
-    # })
-    
+
+    # OUTPUT DATASET FOR PANEL 2
     output$chartTable2 <- DT::renderDataTable({
       FilteredChartData <- AllChartData %>%
-        # filter(year %in% input$selectYear2) %>%
         filter(COUNTYNAME %in% input$selectCounty) %>%
         filter(agi_stub == input$selectSalary2) %>%
         select(STATE, COUNTYNAME, year, N1, A04800, A00200)
@@ -165,16 +147,41 @@ shinyServer(
       DT::datatable(FilteredChartData, options = list(orderClasses = TRUE, paging = FALSE))
     })
     
-    output$yearPlot <- renderPlot({
-      BarPlot %>% filter(Shape %in% input$checkGroup)
+    # OUTPUT BAR PLOT FOR PANEL 2
+    output$yearBarPlot <- renderPlot({
       
+      FilteredBarData <- AllChartData %>%
+        filter(COUNTYNAME %in% input$selectCounty) %>%
+        filter(agi_stub == input$selectSalary2)
       
-      # Render a barplot
-      barplot(WorldPhones[,input$region]*1000, 
-              main=input$region,
-              ylab="Number of Telephones",
-              xlab="Year")
+      selectCountyName <- FilteredBarData %>% 
+        filter(STATE == "WA") %>%
+        group_by(COUNTYNAME) %>%
+        summarise(n_distinct(N1)) %>%
+        select(COUNTYNAME) %>%
+        filter(COUNTYNAME != "Washington")
+      
+      adjustedData <- data.frame(CountyName=rep(selectCountyName$COUNTYNAME, each = 5),
+                        Years=rep(c("2012", "2013", "2014", "2015", "2016"), length(selectCountyName$COUNTYNAME)),
+                        NumberOfReturns=FilteredBarData$N1,
+                        TaxableIncomeAmount=FilteredBarData$A04800,
+                        SalariesAndWagesAmount=FilteredBarData$A00200)
+
+      # ADD REACTIVE FUNCTION FOR DATASET
+      datasetInput2 <- reactive({
+        switch(input$selectDataset2,
+               "N1" = adjustedData$NumberOfReturns,
+               "A04800" = adjustedData$TaxableIncomeAmount,
+               "A00200" = adjustedData$SalariesAndWagesAmount)
+      })
+
+      plot <- ggplot(data=adjustedData, aes(x=Years, y=datasetInput2(), fill=CountyName)) +
+        geom_bar(stat="identity", position=position_dodge()) +
+        theme_minimal()
+      
+      return(plot)
     })
+
     
     ## Put ur codes here.
   }
