@@ -19,7 +19,11 @@ shinyUI(tagList(
         tabPanel(
           "Introduction",
           h3("A Brief Description of Tax Statistics"),
-          h5("Description")
+          p("The dataset that we used for this part of the project is the Statistics of Income: Tax Stats-Individual Income. The income data was collected by the United States Internal Revenue Service (IRS)  and can be found on the IRS website. We will be focusing at a county level in Washington. Our area of studies are:"),
+          pre("        - Number of Return: Data based on how many tax return was filed."), br(),
+          pre("        - Taxable income Amount: Income that are subject to taxation (adjusted gross income). For example, if you make $74,000 a year and donates $4,000 to charity, then your taxable income would be $70,000."), br(),
+          pre("        - Salary and Wages amount: data on salary and wages"), br(),
+          p("Users will be able to select their area of interest from the list above, select their adjusted gross income range, interested year ranging from 2012-2016, and desired number of population range. When changing these variables, the map will visualize the corresponding input through color coding. There will also be a chart option that lists out the counties appropriate to the variables selected that will make it easier for user to see what counties are the best fit for them. The information will be able to let user see which counties would best fit them taken in their adjusted income and population desire.")
         ),
         
         #tab2 compare selected counties
@@ -148,6 +152,24 @@ shinyUI(tagList(
       mainPanel(
         # copy&paste your code here
       )
+    ), 
+    tabPanel(
+      "Conclusion",
+      h5(
+        "Our project would be useful to anyone who are thinking about moving to another county in Washington. 
+        They are able to estimate their adjusted gross income and see which county would be a fit for them which they are 
+        able to also select their desire population. Some people would rather live somewhere where there’s not a lot of 
+        people and others might like to live somewhere with a lot of people (urban vs suburbs). After they are able to see 
+        which county may be a possible fit for them, they can also check housing affordability in that county. 
+        When moving, people often plan for the future and their family. Budgeting is a big part of moving to a new place 
+        and it would be beneficial for users to have an idea of how much rent would cost by the desire bedrooms in 
+        the areas they are looking to move to.  Lastly, poverty rate can give very basic insight into school, living 
+        condition and quality of life in a certain area. These trends usually correlate to lower qualities of life with 
+        high poverty rates / low income neighborhoods. High poverty rates are also likely to influence lower cost of 
+        land/property.  Although our project only measure for poverty rate and doesn’t take in other factors to 
+        account for measuring quality of life, new homeowners or anyone who wants to move may take this into 
+        consideration for the county economic progression throughout the years." 
+      )  
     )
   )
 ))
