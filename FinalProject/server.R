@@ -65,8 +65,24 @@ shinyServer(
         data <- wa_poverty_data[, c("county_name", "Percent", "Year")]
         DT::datatable(data, options = list(lengthMenu = c(9, 17, 25), pageLength = 9), rownames=FALSE)
     })
+       output$povertyPlot <- renderPlot({
+          wa_poverty_data <- read.csv("../data/PovertyData/wa_poverty_data.csv", stringsAsFactors = FALSE)
+          wa_poverty_data <- wa_poverty_data %>% select(county_name, Percent, Year)
+          wa_county_data <- read.csv("../data/PovertyData/wa_county_data.csv", stringsAsFactors = FALSE)
+          wa_county_data <- wa_county_data %>% select(long, lat, order, group, state_abbv, state_fips, county_name)
+          wa_poverty_final_data <- left_join(wa_county_data, wa_poverty_data, by="county_name")
+        
+          filteredCountyData <- wa_poverty_final_data %>% 
+            filter(county_name == input$selectCounty)
+      
+        plot_ly(filteredCountyData, x=~Year, y=~Percent, name = "Poverty Trend", 
+              type = "scatter", mode = "lines", 
+                line = list(color = 'rgb(205, 12, 24)', 
+                width = 4)) %>% 
+                layout(title = ("Poverty Information From 2012 - 2016 For "),
+                xaxis = list(title = "Year"),
+                yaxis = list (title = "Poverty Percentage"))
+       })
     
     
-  }
-  
-)
+  })
