@@ -1,0 +1,114 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+
+```
+
+# A Brief Description of Tax Statistics
+
+---
+
+## Source of Data
+
+---
+
+This project uses the dataset from [Statistics of Income: Tax Stats-Individual Income](https://www.irs.gov/statistics/soi-tax-stats-about-soi). It was originally collected by [the United States Internal Revenue Service (IRS)](https://www.irs.gov/). Due to the time consumption, the scope of this project is limited to county level in Washington. 
+
+
+## Area of Interest
+
+---
+
+
+#### Number of Return
+
+Data based on how many tax return was filed.
+
+
+#### Taxable income Amount
+
+Income that are subject to taxation (adjusted gross income).
+For example, if you make \$74,000 a year and donates \$4,000 to charity, then your taxable income would be $70,000.  
+
+
+#### Salary and Wages amount
+
+data on salary and wages
+
+
+## Interactions
+
+---
+
+There are **two ways** users could explore the statistics of income. They could either compare individual counties across a time span or explore all counties in a certain year. 
+
+When changing the variables from below, the visualizations will visualize the corresponding input through color coding. There will also be a chart option that lists out the counties appropriate to the variables selected that will make it easier for user to see what counties are the best fit for them. The information will be able to let user see which counties would best fit them taken in their adjusted income and population desire.
+
+
+### Compare Selected Counties Aross Year 
+
+In this section, you could either choose to see a visualization of **Bar Plot** or a **Data Table**.  
+
+#### The Bar Plot
+
+* Select Your Area of Interest
+* Select Your Interested Income Group
+* Check Your Interested Counties
+* Check/Uncheck all Counties*
+
+#### The Data Table
+
+* Select Your Interested Income Group 
+* Search Bar/Sort*
+* Check Your Interested Counties*
+* Check/Uncheck all Counties*
+
+
+### Explore Your Interested Data Across Counties
+
+In this section, either choose to see a visualization of **State Map** or a **Data Table**.
+
+#### The Washington Map
+
+* Select Your Area of Interest
+* Select Your Interested Income Group 
+* Select Year
+* Adjust Range to see minor differences*
+
+
+#### The Data Table
+
+* Select Your Interested Income Group 
+* Select Year
+* Sort*
+
+\* optional
+
+
+## Technical Scope
+
+---
+
+### Additional Packages
+
+`shinythemes`
+`shiny`
+`markdown`
+`ggplot2`
+`dplyr`
+`usmap`
+`lubridate`
+`library(urbnmapr)`
+
+
+
+#### Developer
+Mengjiao Li
+
+#### Write-Up
+Mengjiao Li
+
+Cindy Vu
+

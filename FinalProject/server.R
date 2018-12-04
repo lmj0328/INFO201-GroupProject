@@ -51,7 +51,7 @@ shinyServer(
       ggplot(joinedData, aes(long, lat, group = group, fill = datasetInput())) +
         geom_polygon(color = "#ffffff", size = 0.05) +
         coord_map(projection = "albers", lat0 = 39, lat1 = 45) + 
-        labs(fill = "Number", labels = scales::comma) +
+        labs(fill = "Area of Interest", labels = scales::comma) +
         scale_fill_gradientn(colours = terrain.colors(10), 
                              limits=c(input$rangeSlider[1], input$rangeSlider[2]))
     })
@@ -178,7 +178,8 @@ shinyServer(
 
       plot <- ggplot(data=adjustedData, aes(x=Years, y=datasetInput2(), fill=CountyName)) +
         geom_bar(stat="identity", position=position_dodge()) +
-        theme_minimal()
+        theme_minimal() +
+        labs(y="Area of Intereest", labels = scales::comma)
       
       return(plot)
     })

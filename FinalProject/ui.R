@@ -1,34 +1,29 @@
 library(shinythemes)
 library(shiny)
+library(markdown)
 
 source("../Script/ReadData.R")
 
 
 shinyUI(tagList(
-  navbarPage(
-    theme = "paper",
+  navbarPage(theme = shinytheme("sandstone"),
     "Washington Guide",
     
     #Mengjiao's Panel
     tabPanel(
-      "Statistic of Income Tax (Mengjiao)",
+      "Statistic of Income Tax",
       
       tabsetPanel(
         
         #tab1 introduction
         tabPanel(
           "Introduction",
-          h3("A Brief Description of Tax Statistics"),
-          p("The dataset that we used for this part of the project is the Statistics of Income: Tax Stats-Individual Income. The income data was collected by the United States Internal Revenue Service (IRS)  and can be found on the IRS website. We will be focusing at a county level in Washington. Our area of studies are:"),
-          pre("        - Number of Return: Data based on how many tax return was filed."), br(),
-          pre("        - Taxable income Amount: Income that are subject to taxation (adjusted gross income). For example, if you make $74,000 a year and donates $4,000 to charity, then your taxable income would be $70,000."), br(),
-          pre("        - Salary and Wages amount: data on salary and wages"), br(),
-          p("Users will be able to select their area of interest from the list above, select their adjusted gross income range, interested year ranging from 2012-2016, and desired number of population range. When changing these variables, the map will visualize the corresponding input through color coding. There will also be a chart option that lists out the counties appropriate to the variables selected that will make it easier for user to see what counties are the best fit for them. The information will be able to let user see which counties would best fit them taken in their adjusted income and population desire.")
+          includeMarkdown("../Script/TaxMarkDown.Rmd")
         ),
         
         #tab2 compare selected counties
         tabPanel(
-          "Explore Selected Counties Across Years",
+          "Compare Selected Counties Aross Year",
           h4("Chose your interested counties to see the trend for past years."),
           sidebarPanel(
             conditionalPanel(
@@ -58,7 +53,7 @@ shinyUI(tagList(
             checkboxGroupInput("selectCounty", label = h3("Select County"), 
                                choices = ListOfCounties$COUNTYNAME,
                                selected = ListOfCounties$COUNTYNAME),
-            actionButton("UncheckCounty", label = "Check/Uncheck County")
+            actionButton("UncheckCounty", label = "Check/Uncheck County", class = "btn-primary")
             
           ),
           
@@ -77,7 +72,7 @@ shinyUI(tagList(
         
         #tab3 compare different counties
         tabPanel(
-          "Compare Your Interested Data Across Counties",
+          "Explore Your Interested Data Across Counties",
           h4("Put in your interested salary level and year to see how the tax level differ between different counties in washington state."),
           sidebarPanel(
             # SELECTBOX FOR DATASET
