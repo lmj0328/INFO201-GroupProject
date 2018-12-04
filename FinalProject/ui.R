@@ -50,7 +50,8 @@ shinyUI(tagList(
             h5("Description")
           ),
           
-          tabPanel(
+            tabPanel(
+              
             "Map Plot", 
             plotOutput("yearSalary",  width = "100%")
           ),
