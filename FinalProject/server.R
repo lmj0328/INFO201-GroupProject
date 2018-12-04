@@ -230,7 +230,7 @@ shinyServer(
           geom_point() + 
           geom_line() +
           xlab("Year") + 
-          ylab(paste0("Monthly Rent in ", input$countySelect))
+          ylab(paste0("Monthly Rent of ", input$bdrmSelect2, " in ", input$countySelect))
         print(trend_plot)
       })
       
