@@ -27,27 +27,38 @@ shinyUI(tagList(
           "Explore Selected Counties Across Years",
           h4("Chose your interested counties to see the trend for past years."),
           sidebarPanel(
-            # CHECKBOX FOR YEAR
-            checkboxGroupInput("selectYear2", label = h3("Select Year"), 
-                               choices = listOfYear,
-                               selected = listOfYear),
-            actionButton("UncheckYear", label = "Check/Uncheck Year"),
+            #SELECTBOX FOR SALARY
+            selectInput("selectSalary2", label = h3("Select Adjusted Gross Income"),
+                        choices = list("$1 under $10,000" = 2,
+                                       "$10,000 under $25,000" = 3,
+                                       "$25,000 under $50,000" = 4,
+                                       "$50,000 under $75,000" = 5,
+                                       "$75,000 under $100,000" = 6,
+                                       "$100,000 under $200,000" = 7,
+                                       "$200,000 or more" = 8),
+                        selected = 2),
             
             #CHECKBOX FOR COUNTY
             checkboxGroupInput("selectCounty", label = h3("Select County"), 
                                choices = ListOfCounties$COUNTYNAME,
                                selected = ListOfCounties$COUNTYNAME),
             actionButton("UncheckCounty", label = "Check/Uncheck County")
+            
+            # # CHECKBOX FOR INCOME
+            # checkboxGroupInput("selectYear2", label = h3("Select Year"), 
+            #                    choices = listOfYear,
+            #                    selected = listOfYear),
+            # actionButton("UncheckYear", label = "Check/Uncheck Year")
           ),
           
           mainPanel(
             tabsetPanel(
               tabPanel(
-                "Edit Later",
+                "Bar Plot",
                 h1("Edit Later")),
               tabPanel(
-                "Edit Later2",
-                h1("Edit Later"))
+                "View Data",
+                DT::dataTableOutput("chartTable2"))
             )
           )
         ),

@@ -129,25 +129,41 @@ shinyServer(
       }
     })
     
-    # observe code for year's action button
-    observe({
-      if (input$UncheckYear > 0) {
-        if (input$UncheckYear %% 2 == 0){
-          updateCheckboxGroupInput(session=session,
-                                   inputId="selectYear2",
-                                   choices = listOfYear,
-                                   selected = listOfYear)
-          
-        } else {
-          updateCheckboxGroupInput(session=session,
-                                   inputId="selectYear2",
-                                   choices = listOfYear,
-                                   selected = "")
-          
-        }
-      }
-    })
+    # # observe code for year's action button
+    # observe({
+    #   if (input$UncheckYear > 0) {
+    #     if (input$UncheckYear %% 2 == 0){
+    #       updateCheckboxGroupInput(session=session,
+    #                                inputId="selectYear2",
+    #                                choices = listOfYear,
+    #                                selected = listOfYear)
+    #       
+    #     } else {
+    #       updateCheckboxGroupInput(session=session,
+    #                                inputId="selectYear2",
+    #                                choices = listOfYear,
+    #                                selected = "")
+    #       
+    #     }
+    #   }
+    # })
     
+    output$chartTable2 <- DT::renderDataTable({
+      FilteredChartData <- AllChartData %>%
+        # filter(year %in% input$selectYear2) %>%
+        filter(COUNTYNAME %in% input$selectCounty) %>%
+        filter(agi_stub == input$selectSalary2) %>%
+        select(STATE, COUNTYNAME, year, N1, A04800, A00200)
+      
+      colnames(FilteredChartData)[1] <- "State" 
+      colnames(FilteredChartData)[2] <- "County" 
+      colnames(FilteredChartData)[3] <- "Year" 
+      colnames(FilteredChartData)[4] <- "Number of Returns" 
+      colnames(FilteredChartData)[5] <- "Taxable Income Amount" 
+      colnames(FilteredChartData)[6] <- "Salaries and Wages Amount" 
+      
+      DT::datatable(FilteredChartData, options = list(orderClasses = TRUE, paging = FALSE))
+    })
     
     output$yearPlot <- renderPlot({
       BarPlot %>% filter(Shape %in% input$checkGroup)

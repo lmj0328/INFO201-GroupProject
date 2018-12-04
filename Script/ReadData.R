@@ -12,51 +12,63 @@ Data2016 <- read.csv("../Data/SOITaxData/2016.csv")
 WashingtonState2012 <- Data2012 %>%
   filter(STATE == "WA") %>%
   filter(COUNTYNAME != "Washington") %>%
-  select(STATE, COUNTYNAME, N1, A04800, A00200)
-
-colnames(WashingtonState2012)[3] <- "2012N1" 
-colnames(WashingtonState2012)[4] <- "2012A04800" 
-colnames(WashingtonState2012)[5] <- "2012A00200" 
+  select(STATE, COUNTYNAME, agi_stub, N1, A04800, A00200) %>%
+  mutate(year = 2012)
 
 WashingtonState2013 <- Data2013 %>%
   filter(STATE == "WA") %>%
   filter(COUNTYNAME != "Washington") %>%
-  select(N1, A04800, A00200)
-
-colnames(WashingtonState2013)[1] <- "2013N1" 
-colnames(WashingtonState2013)[2] <- "2013A04800" 
-colnames(WashingtonState2013)[3] <- "2013A00200" 
+  select(STATE, COUNTYNAME, agi_stub, N1, A04800, A00200) %>%
+  mutate(year = 2013)
 
 WashingtonState2014 <- Data2014 %>%
   filter(STATE == "WA") %>%
   filter(COUNTYNAME != "Washington") %>%
-  select(N1, A04800, A00200)
-
-colnames(WashingtonState2014)[1] <- "2014N1" 
-colnames(WashingtonState2014)[2] <- "2014A04800" 
-colnames(WashingtonState2014)[3] <- "2014A00200" 
+  select(STATE, COUNTYNAME, agi_stub, N1, A04800, A00200) %>%
+  mutate(year = 2014)
 
 WashingtonState2015 <- Data2015 %>%
   filter(STATE == "WA") %>%
   filter(COUNTYNAME != "Washington") %>%
-  select(N1, A04800, A00200)
-
-colnames(WashingtonState2015)[1] <- "2015N1" 
-colnames(WashingtonState2015)[2] <- "2015A04800" 
-colnames(WashingtonState2015)[3] <- "2015A00200" 
+  select(STATE, COUNTYNAME, agi_stub, N1, A04800, A00200) %>%
+  mutate(year = 2015)
 
 WashingtonState2016 <- Data2016 %>%
   filter(STATE == "WA") %>%
   filter(COUNTYNAME != "Washington") %>%
-  select(N1, A04800, A00200)
-
-colnames(WashingtonState2016)[1] <- "2016N1" 
-colnames(WashingtonState2016)[2] <- "2016A04800" 
-colnames(WashingtonState2016)[3] <- "2016A00200" 
+  select(STATE, COUNTYNAME, agi_stub, N1, A04800, A00200) %>%
+  mutate(year = 2016)
 
 remove(Data2012, Data2013, Data2014, Data2015, Data2016)
-         
-BarPlot <- data.frame(WashingtonState2012, WashingtonState2013, WashingtonState2014, WashingtonState2015, WashingtonState2016)
+
+AllChartData <- rbind(WashingtonState2012, WashingtonState2013, WashingtonState2014, WashingtonState2015, WashingtonState2016)
+
+colnames(WashingtonState2013)[1] <- "N1.2013" 
+colnames(WashingtonState2013)[2] <- "A04800.2013" 
+colnames(WashingtonState2013)[3] <- "A00200.2013" 
+
+colnames(WashingtonState2014)[1] <- "N1.2014" 
+colnames(WashingtonState2014)[2] <- "A04800.2014" 
+colnames(WashingtonState2014)[3] <- "A00200.2014" 
+
+colnames(WashingtonState2015)[1] <- "N1.2015" 
+colnames(WashingtonState2015)[2] <- "A04800.2015" 
+colnames(WashingtonState2015)[3] <- "A00200.2015" 
+
+colnames(WashingtonState2016)[1] <- "N1.2016" 
+colnames(WashingtonState2016)[2] <- "A04800.2016" 
+colnames(WashingtonState2016)[3] <- "A00200.2016" 
+
+BarPlotData <- data.frame(WashingtonState2012, WashingtonState2013, WashingtonState2014, WashingtonState2015, WashingtonState2016)
+
+colnames(BarPlotData)[1] <- "STATE" 
+colnames(BarPlotData)[2] <- "COUNTYNAME" 
+colnames(BarPlotData)[3] <- "N1.2012" 
+colnames(BarPlotData)[4] <- "A04800.2012" 
+colnames(BarPlotData)[5] <- "A00200.2012" 
+
+remove(WashingtonState2012, WashingtonState2013, WashingtonState2014, WashingtonState2015, WashingtonState2016)
+
 
 ListOfCounties <- RawData %>% 
   filter(STATE == "WA") %>%
