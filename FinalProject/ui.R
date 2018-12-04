@@ -6,13 +6,12 @@ source("../Script/ReadData.R")
 
 
 shinyUI(tagList(
-  navbarPage(
-    theme = "paper",
+  navbarPage(theme = shinytheme("sandstone"),
     "Washington Guide",
     
     #Mengjiao's Panel
     tabPanel(
-      "Statistic of Income Tax (Mengjiao)",
+      "Statistic of Income Tax",
       
       tabsetPanel(
         
@@ -54,7 +53,7 @@ shinyUI(tagList(
             checkboxGroupInput("selectCounty", label = h3("Select County"), 
                                choices = ListOfCounties$COUNTYNAME,
                                selected = ListOfCounties$COUNTYNAME),
-            actionButton("UncheckCounty", label = "Check/Uncheck County")
+            actionButton("UncheckCounty", label = "Check/Uncheck County", class = "btn-primary")
             
           ),
           
