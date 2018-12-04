@@ -66,22 +66,24 @@ shinyServer(
         DT::datatable(data, options = list(lengthMenu = c(9, 17, 25), pageLength = 9), rownames=FALSE)
     })
        output$povertyPlot <- renderPlot({
-          wa_poverty_data <- read.csv("../data/PovertyData/wa_poverty_data.csv", stringsAsFactors = FALSE)
-          wa_poverty_data <- wa_poverty_data %>% select(county_name, Percent, Year)
-          wa_county_data <- read.csv("../data/PovertyData/wa_county_data.csv", stringsAsFactors = FALSE)
-          wa_county_data <- wa_county_data %>% select(long, lat, order, group, state_abbv, state_fips, county_name)
-          wa_poverty_final_data <- left_join(wa_county_data, wa_poverty_data, by="county_name")
-        
-          filteredCountyData <- wa_poverty_final_data %>% 
-            filter(county_name == input$selectCounty)
-      
-        plot_ly(filteredCountyData, x=~Year, y=~Percent, name = "Poverty Trend", 
-              type = "scatter", mode = "lines", 
-                line = list(color = 'rgb(205, 12, 24)', 
-                width = 4)) %>% 
-                layout(title = ("Poverty Information From 2012 - 2016 For "),
-                xaxis = list(title = "Year"),
-                yaxis = list (title = "Poverty Percentage"))
+         wa_pov_data <- read.csv("../data/PovertyData/wa_poverty_data.csv", stringsAsFactors = FALSE)
+         wa_pov_data <- wa_pov_data %>% select(county_name, Percent, Year)
+         wa_cou_data <- read.csv("../data/PovertyData/wa_county_data.csv", stringsAsFactors = FALSE)
+         wa_cou_data <- wa_cou_data %>% select(long, lat, order, group, state_abbv, state_fips, county_name)
+         wa_poverty_final_data <- left_join(wa_cou_data, wa_pov_data, by="county_name")
+         
+         wa_pov_16 <- wa_poverty_data %>% filter(Year == '2016')
+         wa_pov_16$pov_z <- round((wa_pov_16$Percent - mean(wa_pov_16$Percent))/sd(wa_pov_16$Percent), 2)
+         wa_pov_16$pov_type <- ifelse(wa_pov_16$pov_z < 0, "above", "below")  # above / below avg flag
+         wa_pov_16$county_names <- wa_pov_16$county_name
+         ggplot(wa_pov_16, aes(x=county_names, y=wa_pov_16$pov_z, label=pov_z)) + 
+           geom_bar(stat='identity', aes(fill=pov_type), width=.5)  +
+           scale_fill_manual(name="WA Poverty Avg ", 
+                             labels = c("Below Average", "Above Average"), 
+                             values = c("above"="#00ba38", "below"="#f8766d")) + 
+           labs(subtitle="WA Poverty Visual", 
+                title= "Diverging Bars") + 
+           coord_flip()
        })
     
     
