@@ -8,6 +8,10 @@ source("../Script/ReadData.R")
 shinyUI(tagList(
   navbarPage(theme = shinytheme("sandstone"),
     "Washington Guide",
+    tabPanel(
+      "Introduction",
+      h1("edited later")
+    ),
 
     #Mengjiao's Panel
     tabPanel(
