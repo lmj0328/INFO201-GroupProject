@@ -27,6 +27,18 @@ shinyUI(tagList(
           "Explore Selected Counties Across Years",
           h4("Chose your interested counties to see the trend for past years."),
           sidebarPanel(
+            conditionalPanel(
+              'input.subpanels2 === "Bar Plot"',
+              selectInput(
+                "selectDataset2", 
+                label = h3("Select Your Interested Data"),
+                choices = list("Number of Returns" = "N1",
+                               "Taxable Income Amount" = "A04800",
+                               "Salaries and Wages Amount" = "A00200"),
+                selected = "N1"
+              )
+            ),
+            
             #SELECTBOX FOR SALARY
             selectInput("selectSalary2", label = h3("Select Adjusted Gross Income"),
                         choices = list("$1 under $10,000" = 2,
@@ -44,18 +56,14 @@ shinyUI(tagList(
                                selected = ListOfCounties$COUNTYNAME),
             actionButton("UncheckCounty", label = "Check/Uncheck County")
             
-            # # CHECKBOX FOR INCOME
-            # checkboxGroupInput("selectYear2", label = h3("Select Year"), 
-            #                    choices = listOfYear,
-            #                    selected = listOfYear),
-            # actionButton("UncheckYear", label = "Check/Uncheck Year")
           ),
           
           mainPanel(
             tabsetPanel(
+              id = 'subpanels2',
               tabPanel(
                 "Bar Plot",
-                h1("Edit Later")),
+                plotOutput("yearBarPlot", width = "100%")),
               tabPanel(
                 "View Data",
                 DT::dataTableOutput("chartTable2"))
@@ -68,6 +76,7 @@ shinyUI(tagList(
           "Compare Your Interested Data Across Counties",
           h4("Put in your interested salary level and year to see how the tax level differ between different counties in washington state."),
           sidebarPanel(
+            # SELECTBOX FOR DATASET
             conditionalPanel(
               'input.subpanels === "Washington State Map"',
               selectInput(
@@ -80,6 +89,7 @@ shinyUI(tagList(
               )
             ),
             
+            # SELECTBOX FOR SALARY
             selectInput("selectSalary", label = h3("Select Adjusted Gross Income"),
                         choices = list("$1 under $10,000" = 2,
                                        "$10,000 under $25,000" = 3,
@@ -90,6 +100,7 @@ shinyUI(tagList(
                                        "$200,000 or more" = 8),
                         selected = 2),
             
+            # SELECTBOX FOR YEAR
             selectInput("selectYear", label = h3("Select Year"), 
                         choices = list("2012" = 2012, 
                                        "2013" = 2013, 
@@ -98,6 +109,7 @@ shinyUI(tagList(
                                        "2016" = 2016), 
                         selected = 2012),
             
+            # SELECTBOX FOR RANGE
             conditionalPanel(
               'input.subpanels === "Washington State Map"',
               sliderInput("rangeSlider", label = h3("Enter Range"), min = 0,
