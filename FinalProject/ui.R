@@ -139,11 +139,11 @@ shinyUI(tagList(
     ),   
     
     tabPanel(
-      "Statistics of Monthly Housing payment (Cindy & Jennifer)", 
+      "Statistics of Monthly Housing payment", 
       tabsetPanel(
         #tabPanel 1
         tabPanel(
-          titlePanel("Monthly Rent in Each County by Year"),
+          "Monthly Rent in Each County by Year",
           sidebarPanel(
             width = 350,
             ## SELECTBOX FOR BEDROOM
@@ -174,7 +174,7 @@ shinyUI(tagList(
         ),
         #tabPanel2
         tabPanel(
-          titlePanel("Monthly Rent Trends by County"),
+          "Monthly Rent Trends by County",
           sidebarPanel(
             width = 350,
             ## SELECTBOX FOR COUNTY
