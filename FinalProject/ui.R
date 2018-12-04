@@ -100,7 +100,17 @@ shinyUI(tagList(
             plotOutput("yearPOV",  width = "100%")
           ),
           
-          tabPanel("Histogram Plot", "This panel is intentionally left blank")
+          tabPanel(
+            "Histogram Plot", 
+            
+              selectInput("selectCounty", label = h3("Select County to View"),
+                        choices = list("Adams County" = "Adams County",
+                                       "King County" = "King County",
+                                       "Asotin County" = "Asotin",
+                                       "Benton County" = "Benton County")),
+                                       
+                        
+            plotOutput("povertyPlot", width = "100%"))
         )
       )
       )
