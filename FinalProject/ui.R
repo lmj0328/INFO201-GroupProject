@@ -145,31 +145,84 @@ shinyUI(tagList(
     
     tabPanel(
       "Statistics of Monthly Housing payment (Cindy & Jennifer)", 
-      sidebarPanel(
-        ## SELECTBOX FOR BEDROOM
-        selectInput("bdrmSelect",
-                    label = "Select interested type of unit",
-                    choices = list ("0 bedroom" = "0_bedroom", 
-                                    "1 bedroom" = "1_bedroom",
-                                    "2 bedroom" = "2_bedroom",
-                                    "3 bedroom" = "3_bedroom",
-                                    "4 bedroom" = "4_bedroom")),
-        ## SELECTBOX FOR YEAR
-        selectInput("yearSelect",
-                    label = "Select interested year",
-                    choices = list ("2011" = 2011,
-                                    "2012" = 2012,
-                                    "2013" = 2013,
-                                    "2014" = 2014,
-                                    "2015" = 2015,
-                                    "2016" = 2016)
-                    
+      tabsetPanel(
+        #tabPanel 1
+        tabPanel(
+          titlePanel("Monthly Rent in Each County by Year"),
+          sidebarPanel(
+            width = 350,
+            ## SELECTBOX FOR BEDROOM
+            selectInput("bdrmSelect",
+                        label = "Select interested type of unit",
+                        choices = list ("0 bedroom" = "0_bedroom", 
+                                        "1 bedroom" = "1_bedroom",
+                                        "2 bedroom" = "2_bedroom",
+                                        "3 bedroom" = "3_bedroom",
+                                        "4 bedroom" = "4_bedroom")),
+            ## SELECTBOX FOR YEAR
+            selectInput("yearSelect",
+                        label = "Select interested year",
+                        choices = list ("2011" = 2011,
+                                        "2012" = 2012,
+                                        "2013" = 2013,
+                                        "2014" = 2014,
+                                        "2015" = 2015,
+                                        "2016" = 2016)
+                        
+                        
+            )
+          ),
+          
+          mainPanel(
+            plotOutput("distPlot")
+          )
+        ),
+        #tabPanel2
+        tabPanel(
+          titlePanel("Monthly Rent Trends by County"),
+          sidebarPanel(
+            width = 350,
+            ## SELECTBOX FOR COUNTY
+            selectInput("countySelect",
+                        label = "Select interested county",
+                        choices = list ("Adams County", "Asotin County",
+                                        "Benton County", "Chelan County",
+                                        "Clallam County", "Clark County",
+                                        "Columbia County", "Cowlitz County",
+                                        "Douglas County", "Ferry County",
+                                        "Franklin County", "Garfield County",
+                                        "Grant County", "Grays Harbor County",
+                                        "Island County", "Jefferson County",
+                                        "King County", "Kitsap County",
+                                        "Kittitas County", "Klickitat County",
+                                        "Lewis County", "Lincoln County",
+                                        "Mason County", "Okanogan County",
+                                        "Pacific County", "Pend Oreille County",
+                                        "Pierce County", "San Juan County",
+                                        "Skagit County", "Skamania County",
+                                        "Snohomish County", "Spokane County",
+                                        "Stevens County", "Thurston County",
+                                        "Wahkiakum County", "Walla Walla County",
+                                        "Whatcom County", "Whitman County",
+                                        "Yakima County")),
+            
+            selectInput("bdrmSelect2",
+                        label = "Select interested type of unit",
+                        choices = list ("0 bedroom" = "0_bedroom", 
+                                        "1 bedroom" = "1_bedroom",
+                                        "2 bedroom" = "2_bedroom",
+                                        "3 bedroom" = "3_bedroom",
+                                        "4 bedroom" = "4_bedroom"))
+            
+          ),
+          
+          mainPanel(
+            plotOutput("trendPlot")
+          )
+          
         )
-      ),
-      
-      mainPanel(
-        plotOutput("distPlot")
       )
+      
     ),
     
     
