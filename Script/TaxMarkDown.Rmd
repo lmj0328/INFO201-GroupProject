@@ -7,18 +7,7 @@ output: html_document
 
 ```
 
-# Our Project
-
----
-
-* How would a person fit into an area (county) by their adjusted gross income
-* What are the housing affrodability compared across counties by different years (edited)
-* What is the rate of economic progression over the years by counties based on poverty rate
-* Is there a correlation between median income and poverty rate
-
----
-
-## A Brief Description of Tax Statis
+# Description of Tax Statistic
 
 ## Source of Data
 
