@@ -181,7 +181,7 @@ shinyServer(
       
       return(plot)
     })
-      #HOUSING PLOT
+      #OUTPUT FOR TABPANEL 1 (COMPARE COUNTIES)
       output$distPlot <- renderPlot({
         select_data <- read.csv(paste0("../Data/OORHousingData/", input$yearSelect,"-", input$bdrmSelect, ".csv"))
         select_data$monthly_rent <- as.numeric(gsub("[^0-9.]", "",select_data$monthly_rent))
@@ -192,6 +192,45 @@ shinyServer(
           scale_fill_gradient(low = "green", high = "red") +
           labs(x = "County", y = "Monthly Rent (USD)", title = paste0(input$bdrmSelect, " monthly rent by counties in Washington in ", input$yearSelect))
         print(plot)
+      })
+      
+      #OUTPUT FOR TABPANEL 2 (COMPARE YEARS)
+      output$trendPlot <- renderPlot({
+        select_data_2011 <- read.csv(paste0("../Data/OORHousingData/", 2011, "-", input$bdrmSelect, ".csv"))
+        select_data_2012 <- read.csv(paste0("../Data/OORHousingData/", 2012, "-", input$bdrmSelect, ".csv"))
+        select_data_2013 <- read.csv(paste0("../Data/OORHousingData/", 2013, "-", input$bdrmSelect, ".csv"))
+        select_data_2014 <- read.csv(paste0("../Data/OORHousingData/", 2014, "-", input$bdrmSelect, ".csv"))
+        select_data_2015 <- read.csv(paste0("../Data/OORHousingData/", 2015, "-", input$bdrmSelect, ".csv"))
+        select_data_2016 <- read.csv(paste0("../Data/OORHousingData/", 2016, "-", input$bdrmSelect, ".csv"))
+        rename_data_2011 <- select_data_2011 %>% 
+          rename("2011_monthly_rent" = "monthly_rent")
+        rename_data_2012 <- select_data_2012 %>% 
+          rename("2012_monthly_rent" = "monthly_rent")
+        rename_data_2013 <- select_data_2013 %>% 
+          rename("2013_monthly_rent" = "monthly_rent")
+        rename_data_2014 <- select_data_2014 %>% 
+          rename("2014_monthly_rent" = "monthly_rent")
+        rename_data_2015 <- select_data_2015 %>% 
+          rename("2015_monthly_rent" = "monthly_rent")
+        rename_data_2016 <- select_data_2016 %>% 
+          rename("2016_monthly_rent" = "monthly_rent")
+        join_trend_data <- list(rename_data_2011, rename_data_2012, rename_data_2013, rename_data_2014,
+                                rename_data_2015, rename_data_2016) %>% reduce(full_join, by = "COUNTY")
+        filtered_trend_data <- join_trend_data %>% 
+          filter(COUNTY == input$countySelect)
+        filtered_flip_data <- data.frame(t(filtered_trend_data[-1]))
+        colnames(filtered_flip_data) <- filtered_trend_data[, 1]
+        filtered_flip_data <- filtered_flip_data %>% 
+          mutate(year = c(2011, 2012, 2013, 2014, 2015, 2016)) %>% 
+          rename(amount = input$countySelect) %>% 
+          mutate(county = "county")
+        
+        trend_plot <- ggplot(filtered_flip_data, aes(year, amount, group = county, colour = county)) +
+          geom_point() + 
+          geom_line() +
+          xlab("Year") + 
+          ylab(paste0("Monthly Rent in ", input$countySelect))
+        print(trend_plot)
       })
       
   }
