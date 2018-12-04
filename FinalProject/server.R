@@ -17,16 +17,16 @@ shinyServer(
       RawData <- read.csv(paste0("../Data/SOITaxData/", input$selectYear, ".csv"))
       
       filteredData <- RawData %>%
-        filter(STATE == "WA") %>%
-        filter(COUNTYNAME != "Washington") %>%
-        filter(agi_stub == input$selectSalary)
+        dplyr::filter(STATE == "WA") %>%
+        dplyr::filter(COUNTYNAME != "Washington") %>%
+        dplyr::filter(agi_stub == input$selectSalary)
   
       colnames(filteredData)[4] <- "county_name" 
       filteredData$county_name <- as.character(filteredData$county_name)
       
       joinedData <- filteredData %>%
         left_join(counties, by = "county_name") %>% 
-        filter(state_name =="Washington")
+        dplyr::filter(state_name =="Washington")
       
       # ADD REACTIVE FUNCTION FOR DATASET
       datasetInput <- reactive({
@@ -60,9 +60,9 @@ shinyServer(
       RawData <- read.csv(paste0("../Data/SOITaxData/", input$selectYear, ".csv"))
       
       filteredData <- RawData %>%
-        filter(STATE == "WA") %>%
-        filter(COUNTYNAME != "Washington") %>%
-        filter(agi_stub == input$selectSalary) 
+        dplyr::filter(STATE == "WA") %>%
+        dplyr::filter(COUNTYNAME != "Washington") %>%
+        dplyr::filter(agi_stub == input$selectSalary) 
       
       renameData <- filteredData %>%
         select(STATE, COUNTYNAME, N1, A04800, A00200)
@@ -133,8 +133,8 @@ shinyServer(
     # OUTPUT DATASET FOR PANEL 2
     output$chartTable2 <- DT::renderDataTable({
       FilteredChartData <- AllChartData %>%
-        filter(COUNTYNAME %in% input$selectCounty) %>%
-        filter(agi_stub == input$selectSalary2) %>%
+        dplyr::filter(COUNTYNAME %in% input$selectCounty) %>%
+        dplyr::filter(agi_stub == input$selectSalary2) %>%
         select(STATE, COUNTYNAME, year, N1, A04800, A00200)
       
       colnames(FilteredChartData)[1] <- "State" 
@@ -151,15 +151,15 @@ shinyServer(
     output$yearBarPlot <- renderPlot({
       
       FilteredBarData <- AllChartData %>%
-        filter(COUNTYNAME %in% input$selectCounty) %>%
-        filter(agi_stub == input$selectSalary2)
+        dplyr::filter(COUNTYNAME %in% input$selectCounty) %>%
+        dplyr::filter(agi_stub == input$selectSalary2)
       
       selectCountyName <- FilteredBarData %>% 
-        filter(STATE == "WA") %>%
+        dplyr::filter(STATE == "WA") %>%
         group_by(COUNTYNAME) %>%
         summarise(n_distinct(N1)) %>%
         select(COUNTYNAME) %>%
-        filter(COUNTYNAME != "Washington")
+        dplyr::filter(COUNTYNAME != "Washington")
       
       adjustedData <- data.frame(CountyName=rep(selectCountyName$COUNTYNAME, each = 5),
                         Years=rep(c("2012", "2013", "2014", "2015", "2016"), length(selectCountyName$COUNTYNAME)),
