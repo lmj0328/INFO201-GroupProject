@@ -10,6 +10,7 @@ Data2014 <- read.csv("../Data/SOITaxData/2014.csv")
 Data2015 <- read.csv("../Data/SOITaxData/2015.csv")
 Data2016 <- read.csv("../Data/SOITaxData/2016.csv")
 
+RawData <- Data2012
 
 WashingtonState2012 <- Data2012 %>%
   filter(STATE == "WA") %>%
@@ -45,7 +46,12 @@ WashingtonState2016 <- Data2016 %>%
   select(STATE, COUNTYNAME, agi_stub, N1, A04800, A00200) %>%
   mutate(year = 2016)
 
-remove(Data2012, Data2013, Data2014, Data2015, Data2016)
+ListOfCounties <- Data2012 %>% 
+  filter(STATE == "WA") %>%
+  group_by(COUNTYNAME) %>%
+  summarise(n_distinct(N1)) %>%
+  select(COUNTYNAME) %>%
+  filter(COUNTYNAME != "Washington")
 
 AllChartData <- rbind(WashingtonState2012, WashingtonState2013, WashingtonState2014, WashingtonState2015, WashingtonState2016)
 
@@ -53,12 +59,10 @@ FilteredBarData <- AllChartData %>%
   filter(COUNTYNAME %in% ListOfCounties$COUNTYNAME) %>%
   filter(agi_stub == 2)
 
-ListOfCounties <- Data2012 %>% 
-  filter(STATE == "WA") %>%
-  group_by(COUNTYNAME) %>%
-  summarise(n_distinct(N1)) %>%
-  select(COUNTYNAME) %>%
-  filter(COUNTYNAME != "Washington")
+
+
+remove(Data2012, Data2013, Data2014, Data2015, Data2016)
+
 
 adjustedData <- data.frame(CountyName=rep(ListOfCounties$COUNTYNAME, each = 5),
                            Years=rep(c("2012", "2013", "2014", "2015", "2016"), length(ListOfCounties$COUNTYNAME)),
