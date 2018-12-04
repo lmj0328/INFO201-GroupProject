@@ -216,9 +216,9 @@ shinyServer(
         rename_data_2016 <- select_data_2016 %>% 
           rename("2016_monthly_rent" = "monthly_rent")
         join_trend_data <- list(rename_data_2011, rename_data_2012, rename_data_2013, rename_data_2014,
-                                rename_data_2015, rename_data_2016) %>% reduce(full_join, by = "COUNTY")
+                                rename_data_2015, rename_data_2016) %>% tidyverse::reduce(full_join, by = "COUNTY")
         filtered_trend_data <- join_trend_data %>% 
-          filter(COUNTY == input$countySelect)
+          dplyr::filter(COUNTY == input$countySelect)
         filtered_flip_data <- data.frame(t(filtered_trend_data[-1]))
         colnames(filtered_flip_data) <- filtered_trend_data[, 1]
         filtered_flip_data <- filtered_flip_data %>% 
