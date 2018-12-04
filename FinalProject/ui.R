@@ -1,5 +1,6 @@
 library(shinythemes)
 library(shiny)
+library(markdown)
 
 source("../Script/ReadData.R")
 
@@ -18,13 +19,12 @@ shinyUI(tagList(
         #tab1 introduction
         tabPanel(
           "Introduction",
-          h3("A Brief Description of Tax Statistics"),
-          h5("Description")
+          includeMarkdown("../Script/TaxMarkDown.Rmd")
         ),
         
         #tab2 compare selected counties
         tabPanel(
-          "Explore Selected Counties Across Years",
+          "Compare Selected Counties Aross Year",
           h4("Chose your interested counties to see the trend for past years."),
           sidebarPanel(
             conditionalPanel(
@@ -73,7 +73,7 @@ shinyUI(tagList(
         
         #tab3 compare different counties
         tabPanel(
-          "Compare Your Interested Data Across Counties",
+          "Explore Your Interested Data Across Counties",
           h4("Put in your interested salary level and year to see how the tax level differ between different counties in washington state."),
           sidebarPanel(
             # SELECTBOX FOR DATASET
