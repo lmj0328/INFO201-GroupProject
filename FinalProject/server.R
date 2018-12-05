@@ -268,16 +268,16 @@ shinyServer(
     })
     output$povertyPlot <- renderPlot({
       barData <- readDataA()
-      barData$pov_z <- round((barData$Percent - mean(barData$Percent))/sd(barData$Percent), 2)
-      barData$pov_type <- ifelse(barData$pov_z < 0, "above", "below")  # above / below avg flag
+      barData$above_below_SD <- round((barData$Percent - mean(barData$Percent))/sd(barData$Percent), 2)
+      barData$pov_type <- ifelse(barData$above_below_SD < 0, "above", "below")  # above / below avg flag
       barData$county_names <- barData$county_name
-      ggplot(barData, aes(x=county_names, y=barData$pov_z, label=pov_z)) +
+      ggplot(barData, aes(x=county_names, y=barData$above_below_SD, label=above_below_SD)) +
         geom_bar(stat='identity', aes(fill=pov_type), width=.5)  +
-        scale_fill_manual(name="WA Poverty Avg ",
+        scale_fill_manual(name="WA Poverty Avg Deviation ",
                           labels = c("Below Average", "Above Average"),
                           values = c("above"="#00ba38", "below"="#f8766d")) +
         labs(subtitle="WA Poverty Visual",
-             title= "Diverging Bars") +
+             title= "Diverging Bars", caption = "Produced by Jim Griffin") +
         coord_flip()
     })
 
