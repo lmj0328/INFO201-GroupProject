@@ -275,7 +275,7 @@ shinyUI(tagList(
   tabPanel(
     "Conclusion",
     includeMarkdown("../Script/Conclusion.Rmd")
-         
-       )
+      
+     )
     )
   )
