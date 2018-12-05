@@ -236,7 +236,7 @@ shinyUI(tagList(
     
     # Jim's Code
     tabPanel(
-      "Washington Poverty Data (Jim)",
+      "Washington Poverty Data",
       ##    sidebarPanel(
       
       ##    ),
