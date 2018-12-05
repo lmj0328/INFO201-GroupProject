@@ -42,6 +42,10 @@ Our guide will present an organize visualization of data that helps answer the f
 `usmap`
 `lubridate`
 `urbnmapr`
+`tidyverse`
+`rsconnect`
+`plotly`
+`RColorBrewer`
 
 ---
 

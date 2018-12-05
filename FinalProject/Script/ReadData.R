@@ -61,6 +61,7 @@ FilteredBarData <- AllChartData %>%
   
 
 
+
 remove(Data2012, Data2013, Data2014, Data2015, Data2016)
 
 
