@@ -245,11 +245,11 @@ shinyUI(tagList(
       mainPanel(
         tabsetPanel(
           tabPanel(
-            "Introduction to WA Poverty",
+            "Intro to WA Poverty",
             includeMarkdown("Script/Poverty.Rmd")
           ),
           tabPanel(
-            "WA Poverty Data Table",
+            "Poverty Data Table",
             h3("Poverty Data for Washington From 2012-2016"),
             h5("Filter by County or Year in Table 'Search' Box"),
             tabPanel("Text View", DT::dataTableOutput("povertyTable"))
@@ -257,7 +257,7 @@ shinyUI(tagList(
           ),
 
           tabPanel(
-            "WA Poverty Map Plot",
+            "Poverty Map Plot",
             selectInput("selectPovYear", label = h3("Select Your Interested Year"),
                         choices = list("2012" = 2012,
                                        "2013" = 2013,
@@ -270,7 +270,7 @@ shinyUI(tagList(
           ),
 
           tabPanel(
-            "WA Poverty Diverging Bar Plot",
+            "Poverty Bar Plot",
             selectInput("selectBarYear", label = h3("Select Your Interested Year"),
                         choices = list("2012" = 2012,
                                        "2013" = 2013,
