@@ -189,13 +189,31 @@ shinyServer(
 
       
       
-    output$yearPOV <- renderPlot({
+    # Poverty Tab Server Code
+    readData <- reactive({
       wa_poverty_data <- read.csv("Data/PovertyData/wa_poverty_data.csv", stringsAsFactors = FALSE)
-      wa_poverty_data <- wa_poverty_data %>% select(county_name, Percent, Year)
+      wa_poverty_data <- wa_poverty_data %>% dplyr::select(county_name, Percent, Year)
       wa_county_data <- read.csv("Data/PovertyData/wa_county_data.csv", stringsAsFactors = FALSE)
-      wa_county_data <- wa_county_data %>% select(long, lat, order, group, state_abbv, state_fips, county_name)
-      wa_poverty_final_data <- left_join(wa_county_data, wa_poverty_data, by="county_name")
+      wa_county_data <- wa_county_data %>% dplyr::select(long, lat, order, group, state_abbv, state_fips, county_name)
+      wa_final_data <- left_join(wa_county_data, wa_poverty_data, by="county_name")
+      if (input$selectPovYear == "2012"){
+        filteredPOVData <- wa_final_data %>% dplyr::filter(Year == "2012")
+      } else if (input$selectPovYear == "2013") {
+        filteredPOVData <- wa_final_data %>% dplyr::filter(Year == "2013")
+      } else if (input$selectPovYear == "2014") {
+        filteredPOVData <- wa_final_data %>% dplyr::filter(Year == "2014")
+      } else if (input$selectPovYear == "2015") {
+        filteredPOVData <- wa_final_data %>% dplyr::filter(Year == "2015")
+      } else{
+        filteredPOVData <- wa_final_data %>% dplyr::filter(Year == "2016")
+      }
+      filteredPOVData
+    })
+    
+    output$yearPOV <- renderPlot({
+      mapData <- readData()
       
+      ## Tidying up the map plot
       ditch_the_axes <- theme(
         axis.text = element_blank(),
         axis.line = element_blank(),
@@ -205,24 +223,21 @@ shinyServer(
         axis.title = element_blank()
       )
       
+      ## Create a color palette using RColorBrewer
+      palette2colors=function(name){
+        brewer.pal(brewer.pal.info[rownames(brewer.pal.info)==name, "maxcolors"],name)}
       
-      filteredPOVData <- wa_poverty_final_data %>% 
-          dplyr::filter(Year == input$selectPovYear)
-     
-
       
-      ggplot(filteredPOVData, aes(long, lat, group = group, fill = Percent)) +
+      ggplot(mapData, aes(long, lat, group = group, fill = Percent)) +
         geom_polygon(color = "#ffffff", size = 0.05) +
         coord_map(projection = "albers", lat0 = 39, lat1 = 45) + 
         ggtitle("Washington Poverty Rate For", input$selectPovYear) + 
+        scale_fill_gradientn(colours = palette2colors("OrRd")) +
         theme(text = element_text(face = "bold")) + 
         theme(plot.title=element_text(size=32)) +
         
         labs(fill = "% Below Poverty Line") + theme_bw() + ditch_the_axes
-        ##scale_fill_gradientn(colours = terrain.colors(7))
-      
-      
-      
+      ##scale_fill_gradientn(colours = terrain.colors(7))
     })
     
     output$povertyTable <-  DT::renderDataTable({
@@ -231,34 +246,39 @@ shinyServer(
       data <- wa_poverty_data[, c("county_name", "Percent", "Year")]
       DT::datatable(data, options = list(lengthMenu = c(9, 17, 25), pageLength = 9), rownames=FALSE)
     })
-    
-    
-      
-      
-      
-       output$povertyPlot <- renderPlot({
-   
-         wa_pov_data <- read.csv("Data/PovertyData/wa_poverty_data.csv", stringsAsFactors = FALSE)
-         wa_pov_data <- wa_pov_data %>% select(county_name, Percent, Year)
-         wa_cou_data <- read.csv("Data/PovertyData/wa_county_data.csv", stringsAsFactors = FALSE)
-         wa_cou_data <- wa_cou_data %>% select(long, lat, order, group, state_abbv, state_fips, county_name)
-         wa_poverty_final_data <- left_join(wa_cou_data, wa_pov_data, by="county_name")
-         
- 
-         
-         wa_pov_16 <- wa_poverty_final_data %>% dplyr::filter(Year == '2016')
-         wa_pov_16$pov_z <- round((wa_pov_16$Percent - mean(wa_pov_16$Percent))/sd(wa_pov_16$Percent), 2)
-         wa_pov_16$pov_type <- ifelse(wa_pov_16$pov_z < 0, "above", "below")  # above / below avg flag
-         wa_pov_16$county_names <- wa_pov_16$county_name
-         ggplot(wa_pov_16, aes(x=county_names, y=wa_pov_16$pov_z, label=pov_z)) + 
-           geom_bar(stat='identity', aes(fill=pov_type), width=.5)  +
-           scale_fill_manual(name="WA Poverty Avg ", 
-                             labels = c("Below Average", "Above Average"), 
-                             values = c("above"="#00ba38", "below"="#f8766d")) + 
-           labs(subtitle="WA Poverty Visual", 
-                title= "Diverging Bars") + 
-           coord_flip()
-       })
+    readDataA <- reactive({
+      wa_poverty_data <- read.csv("Data/PovertyData/wa_poverty_data.csv", stringsAsFactors = FALSE)
+      wa_poverty_data <- wa_poverty_data %>% dplyr::select(county_name, Percent, Year)
+      wa_county_data <- read.csv("Data/PovertyData/wa_county_data.csv", stringsAsFactors = FALSE)
+      wa_county_data <- wa_county_data %>% dplyr::select(long, lat, order, group, state_abbv, state_fips, county_name)
+      wa_final_data <- left_join(wa_county_data, wa_poverty_data, by="county_name")
+      if (input$selectBarYear == "2012"){
+        filteredPOVData <- wa_final_data %>% dplyr::filter(Year == "2012")
+      } else if (input$selectBarYear == "2013") {
+        filteredPOVData <- wa_final_data %>% dplyr::filter(Year == "2013")
+      } else if (input$selectBarYear == "2014") {
+        filteredPOVData <- wa_final_data %>% dplyr::filter(Year == "2014")
+      } else if (input$selectBarYear == "2015") {
+        filteredPOVData <- wa_final_data %>% dplyr::filter(Year == "2015")
+      } else{
+        filteredPOVData <- wa_final_data %>% dplyr::filter(Year == "2016")
+      }
+      filteredPOVData
+    })
+    output$povertyPlot <- renderPlot({
+      barData <- readDataA()
+      barData$pov_z <- round((barData$Percent - mean(barData$Percent))/sd(barData$Percent), 2)
+      barData$pov_type <- ifelse(barData$pov_z < 0, "above", "below")  # above / below avg flag
+      barData$county_names <- barData$county_name
+      ggplot(barData, aes(x=county_names, y=barData$pov_z, label=pov_z)) + 
+        geom_bar(stat='identity', aes(fill=pov_type), width=.5)  +
+        scale_fill_manual(name="WA Poverty Avg ", 
+                          labels = c("Below Average", "Above Average"), 
+                          values = c("above"="#00ba38", "below"="#f8766d")) + 
+        labs(subtitle="WA Poverty Visual", 
+             title= "Diverging Bars") + 
+        coord_flip()
+    })
 
 
 
