@@ -84,28 +84,3 @@ In this section, either choose to see a visualization of **State Map** or a **Da
 \* optional
 
 
-## Technical Scope
-
----
-
-### Additional Packages
-
-`shinythemes`
-`shiny`
-`markdown`
-`ggplot2`
-`dplyr`
-`usmap`
-`lubridate`
-`library(urbnmapr)`
-
-
-
-#### Developer
-Mengjiao Li
-
-#### Write-Up
-Mengjiao Li
-
-Cindy Vu
-
