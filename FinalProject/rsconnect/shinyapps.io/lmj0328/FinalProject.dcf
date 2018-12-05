@@ -5,8 +5,8 @@ account: lmj0328
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 603631
-bundleId: 1740632
+bundleId: 1740649
 url: https://lmj0328.shinyapps.io/FinalProject/
-when: 1543961391.81069
+when: 1543961756.8828
 asMultiple: FALSE
 asStatic: FALSE

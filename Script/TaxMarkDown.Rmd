@@ -7,8 +7,12 @@ output: html_document
 
 ```
 
+<<<<<<< HEAD
 
 ## A Brief Description of Tax Statis
+=======
+# Description of Tax Statistic
+>>>>>>> 67ab7d207999a9564c61d8a3e143b23636cc2068
 
 ## Source of Data
 
