@@ -3,11 +3,20 @@ Title: Introduction to Washington Guide
 output: html_document
 ---
 
-# Welcome to the Washington Guide!  
+<center>
+# <span style="font-family:Papyrus; font-size:1em;">Welcome to the Washington Guide!</span>  
+</center>
 
 ---
 
-# Our Mission 
+<center>
+![](../Script/washington_flag.jpg)
+
+</center>
+
+---
+
+# <span style="font-family:Papyrus; font-size:1em;">Our Mission</span> 
 
 ---
 
@@ -23,7 +32,7 @@ Our guide will present an organize visualization of data that helps answer the f
 
 ---
 
-### Packages Use
+### <span style="font-family:Papyrus; font-size:1em;">Packages Use</span>
 
 `shinythemes`
 `shiny`
@@ -37,5 +46,5 @@ Our guide will present an organize visualization of data that helps answer the f
 ---
 
 
-### Group Members 
+### <span style="font-family:Papyrus; font-size:1em;">Group Members</span> 
 Mengjiao Li, Chueh-Chen Lai (Jennifer), Jim Griffin, and Cindy Vu 

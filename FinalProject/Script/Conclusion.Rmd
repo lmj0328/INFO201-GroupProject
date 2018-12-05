@@ -3,19 +3,22 @@ Title: Conclusion
 output: html_document
 ---
 
-# Conclusion 
+# <span style="font-family:Papyrus; font-size:1em;">Conclusion</span> 
 
 ---
 
-## Trends
+## <span style="font-family:Papyrus; font-size:1em;">Trends</span>
 
   The most expensive county in the state of Washington is King County. This urban space has attracted many tech companies over the years drawing more people into the area rising the housing market. As job opens for major companies such as Amazon, Boeing, Microsoft, etc., the higher the demand for housing which rises the price up for all housing types. For areas that have more affordable housing, the median income is low and the poverty rate is high. Another major trend is that a lot of the countries had a declind in housing affordability in 2012. This is because 2012 was the lowest point to the end of the housing crisis, known as the the United States housing bubble. This relates to housing affordability because the house market and mortgage interest rates has hit a all time low. 
   
 ---  
 
-## Conclusion  
+## <span style="font-family:Papyrus; font-size:1em;">Conclusion</span>  
 
   With the help of the Washington Guide, interested audience are able to estimate their adjusted gross income and see which county would be a fit for them. They can also select the population preferences: Some people would rather live in areas that doesn't have a lot of people and others might prefer to live somewhere with a high population (urban vs suburbs). After they are able to see which county may be a possible fit for them, they can also check housing affordability in that county. When moving, people often plan for the future and their family. Budgeting is a big part of this step and it would be beneficial for users to have an idea of how much rent would cost by the desire bedrooms in the areas they are looking to move to.  Lastly, poverty rate can give very basic insight into school, living condition and quality of life in a certain area. These trends usually correlate to lower qualities of life with high poverty rates / low income neighborhoods. High poverty rates are also likely to influence lower cost of land/property.  Although our project only measure for poverty rate and doesn’t take in other factors to account for measuring quality of life, new homeowners or anyone who wants to move may take this into consideration for the county economic progression throughout the years for many resons such as job opportunities. We hope that your exploring of our app will serve to be informative and beneficial to your search of a better home! 
+<center>
+![](../Script/moving.jpg)
+</center>
 
 ---
 
