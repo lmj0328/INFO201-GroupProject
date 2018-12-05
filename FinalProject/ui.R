@@ -1,6 +1,7 @@
 library(shinythemes)
 library(shiny)
 library(markdown)
+library(plotly)
 
 source("Script/ReadData.R")
 
@@ -181,7 +182,7 @@ shinyUI(tagList(
           ),
 
           mainPanel(
-            plotOutput("distPlot")
+            plotlyOutput("distPlot")
           )
         ),
         #tabPanel3
@@ -224,7 +225,7 @@ shinyUI(tagList(
           ),
 
           mainPanel(
-            plotOutput("trendPlot")
+            plotlyOutput("trendPlot")
           )
 
         )
