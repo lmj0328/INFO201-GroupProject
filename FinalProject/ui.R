@@ -10,7 +10,7 @@ shinyUI(tagList(
     "Washington Guide",
     tabPanel(
       "Introduction",
-      h1("edited later")
+      includeMarkdown("../Script/IntroductionPage.Rmd")
     ),
 
     #Mengjiao's Panel
@@ -141,11 +141,18 @@ shinyUI(tagList(
         )
       )
     ),
-
+    
     tabPanel(
       "Statistics of Monthly Housing payment",
       tabsetPanel(
-        #tabPanel 1
+       
+         #tab1 introduction
+        tabPanel(
+          "Introduction",
+          includeMarkdown("../Script/HousingIntroduction.Rmd")
+        ),
+        
+        #tabPanel 2
         tabPanel(
           "Monthly Rent in Each County by Year",
           sidebarPanel(
@@ -168,7 +175,6 @@ shinyUI(tagList(
                                         "2015" = 2015,
                                         "2016" = 2016)
 
-
             )
           ),
 
@@ -176,7 +182,7 @@ shinyUI(tagList(
             plotOutput("distPlot")
           )
         ),
-        #tabPanel2
+        #tabPanel3
         tabPanel(
           "Monthly Rent Trends by County",
           sidebarPanel(
@@ -260,28 +266,16 @@ shinyUI(tagList(
 
 
             plotOutput("povertyPlot", width = "100%"))
+         )
         )
       )
-      )
+    ),
+  
+  #tab5 Conclusion
+  tabPanel(
+    "Conclusion",
+    includeMarkdown("../Script/Conclusion.Rmd")
+         
+       )
     )
-    
-  # tabPanel(
-  #     "Conclusion",
-  #     h5(
-  #       "Our project would be useful to anyone who are thinking about moving to another county in Washington.
-  #       They are able to estimate their adjusted gross income and see which county would be a fit for them which they are
-  #       able to also select their desire population. Some people would rather live somewhere where there’s not a lot of
-  #       people and others might like to live somewhere with a lot of people (urban vs suburbs). After they are able to see
-  #       which county may be a possible fit for them, they can also check housing affordability in that county.
-  #       When moving, people often plan for the future and their family. Budgeting is a big part of moving to a new place
-  #       and it would be beneficial for users to have an idea of how much rent would cost by the desire bedrooms in
-  #       the areas they are looking to move to.  Lastly, poverty rate can give very basic insight into school, living
-  #       condition and quality of life in a certain area. These trends usually correlate to lower qualities of life with
-  #       high poverty rates / low income neighborhoods. High poverty rates are also likely to influence lower cost of
-  #       land/property.  Although our project only measure for poverty rate and doesn’t take in other factors to
-  #       account for measuring quality of life, new homeowners or anyone who wants to move may take this into
-  #       consideration for the county economic progression throughout the years."
-  #     )
-  #   )
   )
-)
