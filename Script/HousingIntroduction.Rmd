@@ -1,0 +1,14 @@
+---
+Title: Housing Introduction
+output: html_document
+---
+
+# Introduction to Housing Affordability  
+
+---
+
+The dataset that we used for this part of the project is from the [National Low Income Housing Coalition](https://nlihc.org/oor). It provides information on monthly rent that is required in order to afford the selected numbers of bedrooms by county level. Users are able to select their desired number of bedrooms they would like to rent and the year they want to see. The bar graph will then showcase the average monthly rent of Washington counties depending on the number of rooms selected. In addition, they are able to select one county and see the rent trends over the years in order to predict and budget out for rent if they are interested in moving to the specific area.
+  
+
+
+---
