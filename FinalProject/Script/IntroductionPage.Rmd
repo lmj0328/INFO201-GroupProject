@@ -7,9 +7,7 @@ output: html_document
 
 ---
 
-<center>
-![Our Mission:](/users/cinds/desktop/flag_washington.jpg.png)
-</center>
+# Our Mission 
 
 ---
 

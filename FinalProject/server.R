@@ -7,6 +7,7 @@ library(urbnmapr)
 library(tidyverse)
 library(rsconnect)
 library(plotly)
+library(RColorBrewer)
 
 source("Script/ReadData.R")
 
@@ -284,7 +285,7 @@ shinyServer(
 
       #OUTPUT FOR TABPANEL 1 (COMPARE COUNTIES)
        output$distPlot <- renderPlotly({
-         select_data <- read.csv(paste0("Data/", input$yearSelect,"-", input$bdrmSelect, ".csv"))
+         select_data <- read.csv(paste0("Data/OORHousingData/", input$yearSelect,"-", input$bdrmSelect, ".csv"))
          select_data$monthly_rent <- as.numeric(gsub("[^0-9.]", "",select_data$monthly_rent))
          county <- reorder(select_data$COUNTY, -select_data$monthly_rent)
          plot <- ggplot(select_data, aes(x = county, y = monthly_rent, 
@@ -300,12 +301,12 @@ shinyServer(
       
       #OUTPUT FOR TABPANEL 2 (COMPARE YEARS)
        output$trendPlot <- renderPlotly({
-         select_data_2011 <- read.csv(paste0("Data/", 2011, "-", input$bdrmSelect2, ".csv"))
-         select_data_2012 <- read.csv(paste0("Data/", 2012, "-", input$bdrmSelect2, ".csv"))
-         select_data_2013 <- read.csv(paste0("Data/", 2013, "-", input$bdrmSelect2, ".csv"))
-         select_data_2014 <- read.csv(paste0("Data/", 2014, "-", input$bdrmSelect2, ".csv"))
-         select_data_2015 <- read.csv(paste0("Data/", 2015, "-", input$bdrmSelect2, ".csv"))
-         select_data_2016 <- read.csv(paste0("Data/", 2016, "-", input$bdrmSelect2, ".csv"))
+         select_data_2011 <- read.csv(paste0("Data/OORHousingData/", 2011, "-", input$bdrmSelect2, ".csv"))
+         select_data_2012 <- read.csv(paste0("Data/OORHousingData/", 2012, "-", input$bdrmSelect2, ".csv"))
+         select_data_2013 <- read.csv(paste0("Data/OORHousingData/", 2013, "-", input$bdrmSelect2, ".csv"))
+         select_data_2014 <- read.csv(paste0("Data/OORHousingData/", 2014, "-", input$bdrmSelect2, ".csv"))
+         select_data_2015 <- read.csv(paste0("Data/OORHousingData/", 2015, "-", input$bdrmSelect2, ".csv"))
+         select_data_2016 <- read.csv(paste0("Data/OORHousingData/", 2016, "-", input$bdrmSelect2, ".csv"))
          
          select_data_2011$monthly_rent <- as.numeric(gsub("[^0-9.]", "",select_data_2011$monthly_rent))
          select_data_2012$monthly_rent <- as.numeric(gsub("[^0-9.]", "",select_data_2012$monthly_rent))
