@@ -7,6 +7,12 @@ output: html_document
 
 ---
 
+<center>
+![Our Mission:](/users/cinds/desktop/flag_washington.jpg.png)
+</center>
+
+---
+
 Throughout this guide, it will focus on county level of Washington state. This guide will be useful for anyone who are interested in moving to another location. This could vary from graduating students who are interested in relocating to a particular county for a job or new even homeowners seeking to relocate their families (or themselves). It may also be beneficial to anyone who is doing a research study of income, housing affordability, and poverty rate over recent years. The four questions that this guide will be able to answer are: 
 
 * How would a person fit into a county by their adjusted gross income?
