@@ -2,10 +2,6 @@
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-
-```
-
 # A Brief Description of Tax Statistics
 
 ---

@@ -2,7 +2,7 @@ library(shinythemes)
 library(shiny)
 library(markdown)
 
-source("../Script/ReadData.R")
+source("Script/ReadData.R")
 
 
 shinyUI(tagList(
@@ -18,7 +18,7 @@ shinyUI(tagList(
         #tab1 introduction
         tabPanel(
           "Introduction",
-          includeMarkdown("../Script/TaxMarkDown.Rmd")
+          includeMarkdown("Script/TaxMarkDown.Rmd")
         ),
         
         #tab2 compare selected counties
@@ -53,7 +53,7 @@ shinyUI(tagList(
             checkboxGroupInput("selectCounty", label = h3("Select County"), 
                                choices = ListOfCounties$COUNTYNAME,
                                selected = ListOfCounties$COUNTYNAME),
-            actionButton("UncheckCounty", label = "Check/Uncheck County", class = "btn-primary")
+            actionButton("UncheckCounty", label = "Check/Uncheck County")
             
           ),
           

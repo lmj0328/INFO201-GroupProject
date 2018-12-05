@@ -5,7 +5,7 @@ library(usmap)
 library(lubridate)
 library(urbnmapr)
 
-source("../Script/ReadData.R")
+source("Script/ReadData.R")
 
 shinyServer(
   function(input, output, session) {
@@ -14,7 +14,7 @@ shinyServer(
 
     # OUTPUT MAP FOR PANEL 3
     output$yearSalary <- renderPlot({
-      RawData <- read.csv(paste0("../Data/SOITaxData/", input$selectYear, ".csv"))
+      RawData <- read.csv(paste0("Data/SOITaxData/", input$selectYear, ".csv"))
       
       filteredData <- RawData %>%
         dplyr::filter(STATE == "WA") %>%
@@ -57,7 +57,7 @@ shinyServer(
     
     # OUTPUT DATA TABLE FOR PANEL 3
     output$chartTable <- DT::renderDataTable({
-      RawData <- read.csv(paste0("../Data/SOITaxData/", input$selectYear, ".csv"))
+      RawData <- read.csv(paste0("Data/SOITaxData/", input$selectYear, ".csv"))
       
       filteredData <- RawData %>%
         dplyr::filter(STATE == "WA") %>%
@@ -152,16 +152,18 @@ shinyServer(
       
       FilteredBarData <- AllChartData %>%
         dplyr::filter(COUNTYNAME %in% input$selectCounty) %>%
-        dplyr::filter(agi_stub == input$selectSalary2)
+        dplyr::filter(agi_stub == input$selectSalary2) %>%
+        arrange(year, STATE, COUNTYNAME, agi_stub)
       
       selectCountyName <- FilteredBarData %>% 
         dplyr::filter(STATE == "WA") %>%
         group_by(COUNTYNAME) %>%
         summarise(n_distinct(N1)) %>%
         select(COUNTYNAME) %>%
-        dplyr::filter(COUNTYNAME != "Washington")
+        dplyr::filter(COUNTYNAME != "Washington") %>%
+        arrange(COUNTYNAME)
       
-      adjustedData <- data.frame(CountyName=rep(selectCountyName$COUNTYNAME, each = 5),
+      adjustedData <- data.frame(CountyName=rep(selectCountyName$COUNTYNAME, 5),
                         Years=rep(c("2012", "2013", "2014", "2015", "2016"), length(selectCountyName$COUNTYNAME)),
                         NumberOfReturns=FilteredBarData$N1,
                         TaxableIncomeAmount=FilteredBarData$A04800,
