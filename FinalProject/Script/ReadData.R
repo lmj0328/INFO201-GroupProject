@@ -3,7 +3,11 @@ library(dplyr)
 library(urbnmapr)
 library(ggplot2)
 library(tibble)
+<<<<<<< HEAD:FinalProject/Script/ReadData.R
 #
+=======
+
+>>>>>>> Mengjiao:FinalProject/Script/ReadData.R
 Data2012 <- read.csv("Data/SOITaxData/2012.csv")
 Data2013 <- read.csv("Data/SOITaxData/2013.csv")
 Data2014 <- read.csv("Data/SOITaxData/2014.csv")
@@ -57,8 +61,8 @@ AllChartData <- rbind(WashingtonState2012, WashingtonState2013, WashingtonState2
 
 FilteredBarData <- AllChartData %>%
   dplyr::filter(COUNTYNAME %in% ListOfCounties$COUNTYNAME) %>%
-  dplyr::filter(agi_stub == 2)
-
+  dplyr::filter(agi_stub == 2) 
+  
 
 
 remove(Data2012, Data2013, Data2014, Data2015, Data2016)
@@ -96,8 +100,13 @@ listOfYear <- c(2012,2013,2014,2015,2016)
 NeedMax <- listOfMax[c("N1", "A04800", "A00200")]
 
 outputMax <- function(year, columnName, agi) {
+<<<<<<< HEAD:FinalProject/Script/ReadData.R
   RawData <- read.csv(paste0("../Data/SOITaxData/", year, ".csv"))
   filtered <- RawData %>%
+=======
+  RawData <- read.csv(paste0("Data/SOITaxData/", year, ".csv"))
+  filtered <- RawData %>% 
+>>>>>>> Mengjiao:FinalProject/Script/ReadData.R
     dplyr::filter(STATE == "WA") %>%
     dplyr::filter(COUNTYNAME != "Washington") %>%
     dplyr::filter(agi_stub == agi) %>%

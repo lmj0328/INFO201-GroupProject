@@ -3,7 +3,11 @@ Title: A Brief Description of Tax Statistics
 output: html_document
 ---
 
-# Introduction to Tax Statistics
+# A Brief Description of Tax Statistics
+
+---
+
+## Source of Data
 
 ---
 
