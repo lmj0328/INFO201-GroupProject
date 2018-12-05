@@ -4,11 +4,11 @@ library(urbnmapr)
 library(ggplot2)
 library(tibble)
 #
-Data2012 <- read.csv("../Data/SOITaxData/2012.csv")
-Data2013 <- read.csv("../Data/SOITaxData/2013.csv")
-Data2014 <- read.csv("../Data/SOITaxData/2014.csv")
-Data2015 <- read.csv("../Data/SOITaxData/2015.csv")
-Data2016 <- read.csv("../Data/SOITaxData/2016.csv")
+Data2012 <- read.csv("Data/SOITaxData/2012.csv")
+Data2013 <- read.csv("Data/SOITaxData/2013.csv")
+Data2014 <- read.csv("Data/SOITaxData/2014.csv")
+Data2015 <- read.csv("Data/SOITaxData/2015.csv")
+Data2016 <- read.csv("Data/SOITaxData/2016.csv")
 
 RawData <- Data2012
 

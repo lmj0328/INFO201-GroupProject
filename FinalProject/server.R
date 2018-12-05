@@ -7,7 +7,7 @@ library(urbnmapr)
 library(tidyverse)
 library(rsconnect)
 
-source("../Script/ReadData.R")
+source("Script/ReadData.R")
 
 shinyServer(
   function(input, output, session) {
@@ -16,7 +16,7 @@ shinyServer(
 
     # OUTPUT MAP FOR PANEL 3
     output$yearSalary <- renderPlot({
-      RawData <- read.csv(paste0("../Data/SOITaxData/", input$selectYear, ".csv"))
+      RawData <- read.csv(paste0("Data/SOITaxData/", input$selectYear, ".csv"))
 
       
       filteredData <- RawData %>%
@@ -60,7 +60,7 @@ shinyServer(
     
     # OUTPUT DATA TABLE FOR PANEL 3
     output$chartTable <- DT::renderDataTable({
-      RawData <- read.csv(paste0("../Data/SOITaxData/", input$selectYear, ".csv"))
+      RawData <- read.csv(paste0("Data/SOITaxData/", input$selectYear, ".csv"))
       
       filteredData <- RawData %>%
         dplyr::filter(STATE == "WA") %>%
@@ -189,9 +189,9 @@ shinyServer(
       
       
     output$yearPOV <- renderPlot({
-      wa_poverty_data <- read.csv("../data/PovertyData/wa_poverty_data.csv", stringsAsFactors = FALSE)
+      wa_poverty_data <- read.csv("Data/PovertyData/wa_poverty_data.csv", stringsAsFactors = FALSE)
       wa_poverty_data <- wa_poverty_data %>% select(county_name, Percent, Year)
-      wa_county_data <- read.csv("../data/PovertyData/wa_county_data.csv", stringsAsFactors = FALSE)
+      wa_county_data <- read.csv("Data/PovertyData/wa_county_data.csv", stringsAsFactors = FALSE)
       wa_county_data <- wa_county_data %>% select(long, lat, order, group, state_abbv, state_fips, county_name)
       wa_poverty_final_data <- left_join(wa_county_data, wa_poverty_data, by="county_name")
       
@@ -225,7 +225,7 @@ shinyServer(
     })
     
     output$povertyTable <-  DT::renderDataTable({
-      wa_poverty_data <- read.csv("../data/PovertyData/wa_poverty_data.csv", stringsAsFactors = FALSE)
+      wa_poverty_data <- read.csv("Data/PovertyData/wa_poverty_data.csv", stringsAsFactors = FALSE)
       wa_poverty_data <- wa_poverty_data %>% select(county_name, Percent, Year)
       data <- wa_poverty_data[, c("county_name", "Percent", "Year")]
       DT::datatable(data, options = list(lengthMenu = c(9, 17, 25), pageLength = 9), rownames=FALSE)
@@ -237,9 +237,9 @@ shinyServer(
       
        output$povertyPlot <- renderPlot({
    
-         wa_pov_data <- read.csv("../data/PovertyData/wa_poverty_data.csv", stringsAsFactors = FALSE)
+         wa_pov_data <- read.csv("Data/PovertyData/wa_poverty_data.csv", stringsAsFactors = FALSE)
          wa_pov_data <- wa_pov_data %>% select(county_name, Percent, Year)
-         wa_cou_data <- read.csv("../data/PovertyData/wa_county_data.csv", stringsAsFactors = FALSE)
+         wa_cou_data <- read.csv("Data/PovertyData/wa_county_data.csv", stringsAsFactors = FALSE)
          wa_cou_data <- wa_cou_data %>% select(long, lat, order, group, state_abbv, state_fips, county_name)
          wa_poverty_final_data <- left_join(wa_cou_data, wa_pov_data, by="county_name")
          
@@ -263,7 +263,7 @@ shinyServer(
 
       #OUTPUT FOR TABPANEL 1 (COMPARE COUNTIES)
       output$distPlot <- renderPlot({
-        select_data <- read.csv(paste0("../Data/OORHousingData/", input$yearSelect,"-", input$bdrmSelect, ".csv"))
+        select_data <- read.csv(paste0("Data/OORHousingData/", input$yearSelect,"-", input$bdrmSelect, ".csv"))
         select_data$monthly_rent <- as.numeric(gsub("[^0-9.]", "",select_data$monthly_rent))
         plot <- ggplot(select_data, aes(x = reorder(COUNTY, -monthly_rent), y = monthly_rent, 
                                         fill = monthly_rent)) +
@@ -277,12 +277,12 @@ shinyServer(
       
       #OUTPUT FOR TABPANEL 2 (COMPARE YEARS)
       output$trendPlot <- renderPlot({
-        select_data_2011 <- read.csv(paste0("../Data/OORHousingData/", 2011, "-", input$bdrmSelect2, ".csv"))
-        select_data_2012 <- read.csv(paste0("../Data/OORHousingData/", 2012, "-", input$bdrmSelect2, ".csv"))
-        select_data_2013 <- read.csv(paste0("../Data/OORHousingData/", 2013, "-", input$bdrmSelect2, ".csv"))
-        select_data_2014 <- read.csv(paste0("../Data/OORHousingData/", 2014, "-", input$bdrmSelect2, ".csv"))
-        select_data_2015 <- read.csv(paste0("../Data/OORHousingData/", 2015, "-", input$bdrmSelect2, ".csv"))
-        select_data_2016 <- read.csv(paste0("../Data/OORHousingData/", 2016, "-", input$bdrmSelect2, ".csv"))
+        select_data_2011 <- read.csv(paste0("Data/OORHousingData/", 2011, "-", input$bdrmSelect2, ".csv"))
+        select_data_2012 <- read.csv(paste0("Data/OORHousingData/", 2012, "-", input$bdrmSelect2, ".csv"))
+        select_data_2013 <- read.csv(paste0("Data/OORHousingData/", 2013, "-", input$bdrmSelect2, ".csv"))
+        select_data_2014 <- read.csv(paste0("Data/OORHousingData/", 2014, "-", input$bdrmSelect2, ".csv"))
+        select_data_2015 <- read.csv(paste0("Data/OORHousingData/", 2015, "-", input$bdrmSelect2, ".csv"))
+        select_data_2016 <- read.csv(paste0("Data/OORHousingData/", 2016, "-", input$bdrmSelect2, ".csv"))
         rename_data_2011 <- select_data_2011 %>% 
           rename("2011_monthly_rent" = "monthly_rent")
         rename_data_2012 <- select_data_2012 %>% 
@@ -296,7 +296,7 @@ shinyServer(
         rename_data_2016 <- select_data_2016 %>% 
           rename("2016_monthly_rent" = "monthly_rent")
         join_trend_data <- list(rename_data_2011, rename_data_2012, rename_data_2013, rename_data_2014,
-                                rename_data_2015, rename_data_2016) %>% tidyverse::reduce(full_join, by = "COUNTY")
+                                rename_data_2015, rename_data_2016) %>% reduce(full_join, by = "COUNTY")
         filtered_trend_data <- join_trend_data %>% 
           dplyr::filter(COUNTY == input$countySelect)
         filtered_flip_data <- data.frame(t(filtered_trend_data[-1]))

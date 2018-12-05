@@ -2,7 +2,7 @@ library(shinythemes)
 library(shiny)
 library(markdown)
 
-source("../Script/ReadData.R")
+source("Script/ReadData.R")
 
 
 shinyUI(tagList(
@@ -10,7 +10,7 @@ shinyUI(tagList(
     "Washington Guide",
     tabPanel(
       "Introduction",
-      includeMarkdown("../Script/IntroductionPage.Rmd")
+      includeMarkdown("Script/IntroductionPage.Rmd")
     ),
 
     #Mengjiao's Panel
@@ -20,7 +20,7 @@ shinyUI(tagList(
         #tab1 introduction
         tabPanel(
           "Introduction",
-          includeMarkdown("../Script/TaxMarkDown.Rmd")
+          includeMarkdown("Script/TaxMarkDown.Rmd")
         ),
 
         #tab2 compare selected counties
@@ -149,7 +149,7 @@ shinyUI(tagList(
          #tab1 introduction
         tabPanel(
           "Introduction",
-          includeMarkdown("../Script/HousingIntroduction.Rmd")
+          includeMarkdown("Script/HousingIntroduction.Rmd")
         ),
         
         #tabPanel 2
@@ -271,7 +271,7 @@ shinyUI(tagList(
       #tab5 Conclusion
       tabPanel(
         "Conclusion",
-        includeMarkdown("../Script/Conclusion.Rmd")
+        includeMarkdown("Script/Conclusion.Rmd")
       )
     )
   )
