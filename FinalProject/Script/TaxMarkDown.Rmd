@@ -1,5 +1,5 @@
 ---
-Title: A Brief Description of Tax Statistics
+Title: Introduction to Tax Statistics
 output: html_document
 ---
 
