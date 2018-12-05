@@ -2,33 +2,32 @@ library(shinythemes)
 library(shiny)
 library(markdown)
 
-source("../Script/ReadData.R")
+source("Script/ReadData.R")
 
 
 shinyUI(tagList(
-  navbarPage(theme = shinytheme("sandstone"),
+  navbarPage(theme = shinytheme("superhero"),
     "Washington Guide",
     tabPanel(
       "Introduction",
-      includeMarkdown("../Script/IntroductionPage.Rmd")
+      includeMarkdown("Script/IntroductionPage.Rmd")
     ),
 
     #Mengjiao's Panel
     tabPanel(
       "Statistic of Income Tax",
-
       tabsetPanel(
-
         #tab1 introduction
         tabPanel(
           "Introduction",
-          includeMarkdown("../Script/TaxMarkDown.Rmd")
+          includeMarkdown("Script/TaxMarkDown.Rmd")
         ),
 
         #tab2 compare selected counties
         tabPanel(
           "Compare Selected Counties Aross Year",
           h4("Chose your interested counties to see the trend for past years."),
+          # sidebar panel
           sidebarPanel(
             conditionalPanel(
               'input.subpanels2 === "Bar Plot"',
@@ -57,10 +56,11 @@ shinyUI(tagList(
             checkboxGroupInput("selectCounty", label = h3("Select County"),
                                choices = ListOfCounties$COUNTYNAME,
                                selected = ListOfCounties$COUNTYNAME),
-            actionButton("UncheckCounty", label = "Check/Uncheck County", class = "btn-primary")
 
+            actionButton("UncheckCounty", label = "Check/Uncheck County")
+            
           ),
-
+          # main panel
           mainPanel(
             tabsetPanel(
               id = 'subpanels2',
@@ -78,6 +78,7 @@ shinyUI(tagList(
         tabPanel(
           "Explore Your Interested Data Across Counties",
           h4("Put in your interested salary level and year to see how the tax level differ between different counties in washington state."),
+          # side bar panel
           sidebarPanel(
             # SELECTBOX FOR DATASET
             conditionalPanel(
@@ -120,7 +121,7 @@ shinyUI(tagList(
               )
             )
           ),
-
+          # main panel
           mainPanel(
             tabsetPanel(
               id = 'subpanels',
@@ -142,6 +143,7 @@ shinyUI(tagList(
       )
     ),
     
+    # Jennifer's Code
     tabPanel(
       "Statistics of Monthly Housing payment",
       tabsetPanel(
@@ -149,7 +151,7 @@ shinyUI(tagList(
          #tab1 introduction
         tabPanel(
           "Introduction",
-          includeMarkdown("../Script/HousingIntroduction.Rmd")
+          includeMarkdown("Script/HousingIntroduction.Rmd")
         ),
         
         #tabPanel 2
@@ -229,7 +231,9 @@ shinyUI(tagList(
       )
 
     ),
-
+    
+    
+    # Jim's Code
     tabPanel(
       "Washington Poverty Data (Jim)",
   ##    sidebarPanel(
@@ -261,21 +265,16 @@ shinyUI(tagList(
 
           tabPanel(
             "Histogram Plot",
-
-            
-
-
             plotOutput("povertyPlot", width = "100%"))
          )
         )
-      )
-    ),
+      ),
   
-  #tab5 Conclusion
-  tabPanel(
-    "Conclusion",
-    includeMarkdown("../Script/Conclusion.Rmd")
-      
-     )
+      #tab5 Conclusion
+      tabPanel(
+        "Conclusion",
+        includeMarkdown("Script/Conclusion.Rmd")
+      )
     )
   )
+)

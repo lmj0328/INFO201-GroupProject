@@ -1,0 +1,43 @@
+---
+Title: Introduction to Washington Guide
+output: html_document
+---
+
+# Welcome to the Washington Guide!  
+
+---
+
+<center>
+![Our Mission:](/users/cinds/desktop/flag_washington.jpg.png)
+</center>
+
+---
+
+Throughout this guide, it will focus on county level of Washington state. This guide will be useful for anyone who are interested in moving to another location. This could vary from graduating students who are interested in relocating to a particular county for a job or new even homeowners seeking to relocate their families (or themselves). It may also be beneficial to anyone who is doing a research study of income, housing affordability, and poverty rate over recent years. 
+
+Tab functions: 
+Our guide will present an organize visualization of data that helps answer the following questions: 
+
+1) How would a person fit into a county by their adjusted gross income? </br>
+2) What are the housing affordability compared across all counties by different years? </br>
+3) What is the rate of economic progression over the years by counties based on poverty rate? </br>
+4) Does the $15 minimum wage positively affect poverty rate?
+
+---
+
+### Packages Use
+
+`shinythemes`
+`shiny`
+`markdown`
+`ggplot2`
+`dplyr`
+`usmap`
+`lubridate`
+`urbnmapr`
+
+---
+
+
+### Group Members 
+Mengjiao Li, Chueh-Chen Lai (Jennifer), Jim Griffin, and Cindy Vu 

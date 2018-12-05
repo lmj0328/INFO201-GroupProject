@@ -1,22 +1,17 @@
 ---
-Title: A Brief Description of Tax Statistics
+Title: Introduction to Tax Statistics
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-
-```
-
-## Source of Data
+# Introduction to Tax Statistics
 
 ---
 
 This project uses the dataset from [Statistics of Income: Tax Stats-Individual Income](https://www.irs.gov/statistics/soi-tax-stats-about-soi). It was originally collected by [the United States Internal Revenue Service (IRS)](https://www.irs.gov/). Due to the time consumption, the scope of this project is limited to county level in Washington. 
 
+---
 
 ## Area of Interest
-
----
 
 
 #### **Number of Return:**
@@ -34,10 +29,9 @@ For example, if you make \$74,000 a year and donates \$4,000 to charity, then yo
 
 Data on salary and wages.
 
+---
 
 ## Interactions
-
----
 
 There are **two ways** users could explore the statistics of income. They could either compare individual counties across a time span or explore all counties in a certain year. 
 

@@ -3,10 +3,6 @@ Title: Housing Introduction
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-
-```
-
 # Introduction to Housing Affordability  
 
 ---
