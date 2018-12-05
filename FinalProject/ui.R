@@ -6,7 +6,7 @@ source("Script/ReadData.R")
 
 
 shinyUI(tagList(
-  navbarPage(theme = shinytheme("superhero"),
+  navbarPage(theme = shinytheme("yeti"),
     "Washington Guide",
     tabPanel(
       "Introduction",
