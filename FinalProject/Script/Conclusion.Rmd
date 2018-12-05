@@ -9,7 +9,8 @@ output: html_document
 
 ## Trends
 
-  The most expensive county in the state of Washington is King County. This urban space has attracted many tech companies over the years drawing more people into the area rising the housing market. As job opens for major companies such as Amazon, Boeing, Microsoft, etc., the higher the demand for housing which rises the price up for all housing types. For areas that have more affordable housing, the median income is low and the poverty rate is high. Another major trend is that a lot of the countries had a declind in housing affordability in 2012. This is because 2012 was the lowest point to the end of the housing crisis, known as the the United States housing bubble. 
+  The most expensive county in the state of Washington is King County. This urban space has attracted many tech companies over the years drawing more people into the area rising the housing market. As job opens for major companies such as Amazon, Boeing, Microsoft, etc., the higher the demand for housing which rises the price up for all housing types. For areas that have more affordable housing, the median income is low and the poverty rate is high. Another major trend is that a lot of the countries had a declind in housing affordability in 2012. This is because 2012 was the lowest point to the end of the housing crisis, known as the the United States housing bubble. This relates to housing affordability because the house market and mortgage interest rates has hit a all time low.
+  
 ---  
 
 ## Conclusion  
