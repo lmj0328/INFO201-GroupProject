@@ -244,7 +244,7 @@ shinyServer(
          
  
          
-         wa_pov_16 <- wa_poverty_final_data %>% filter(Year == '2016')
+         wa_pov_16 <- wa_poverty_final_data %>% dplyr::filter(Year == '2016')
          wa_pov_16$pov_z <- round((wa_pov_16$Percent - mean(wa_pov_16$Percent))/sd(wa_pov_16$Percent), 2)
          wa_pov_16$pov_type <- ifelse(wa_pov_16$pov_z < 0, "above", "below")  # above / below avg flag
          wa_pov_16$county_names <- wa_pov_16$county_name
