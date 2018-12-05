@@ -1,0 +1,46 @@
+---
+Author: Jim Griffin
+Title: A Brief Description of Washington Poverty
+output: html_document
+---
+
+# Introduction to Washington Poverty
+
+---
+
+This project uses the dataset from [US Census Bureau: American Factfinder](https://factfinder.census.gov/faces/nav/jsf/pages/community_facts.xhtml). You can find information about any city, county, or state from the Census Bureau.
+
+---
+
+## Area of Interest
+
+
+#### Poverty Rates Throughout Washington
+
+Data is based on county level poverty rates from 2012 through 2016
+
+#### County Poverty Rates compared against Washington's Average
+
+Washington's mean poverty rate was computed and each county was compared against the mean.
+
+---
+
+## Interactions
+
+### Data Table
+
+The user can use the 'search' box in the data table to search by either year or county. For instance, if the user would like to see how Seattle's $15 an hour Minimum Wage law has affected poverty statistics they could do a search on King County to see how poverty rates have changed from 2012 - 2016. The data table shows:
+    County Name
+    Percent
+    Year (data was collected)
+
+### Washington State Map
+
+For the Washington state map, a user can select a year to view a colored map of poverty rates.  
+
+### Diverging Bars map (Compare County Against Washington Poverty Average)
+The user can select a year to view the different diverging bars plot. Green means the county's poverty rate is lower than the average. If the county is red, their poverty rate is above the state average.
+
+
+
+
