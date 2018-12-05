@@ -236,20 +236,24 @@ shinyUI(tagList(
     # Jim's Code
     tabPanel(
       "Washington Poverty Data (Jim)",
-  ##    sidebarPanel(
-
-  ##    ),
-
+      ##    sidebarPanel(
+      
+      ##    ),
+      
       mainPanel(
         tabsetPanel(
           tabPanel(
-            "Intro",
+            "Introduction",
+            includeMarkdown("Script/Poverty.Rmd")
+          ),
+          tabPanel(
+            "Data Table",
             h3("Poverty Data for Washington From 2012-2016"),
             h5("Filter by County or Year in Table 'Search' Box"),
             tabPanel("Text View", DT::dataTableOutput("povertyTable"))
-
+            
           ),
-
+          
           tabPanel(
             "Map Plot",
             selectInput("selectPovYear", label = h3("Select Your Interested Year"),
@@ -262,13 +266,22 @@ shinyUI(tagList(
                         selected = 2012),
             plotOutput("yearPOV",  width = "100%")
           ),
-
+          
           tabPanel(
             "Histogram Plot",
-            plotOutput("povertyPlot", width = "100%"))
-         )
+            selectInput("selectBarYear", label = h3("Select Your Interested Year"),
+                        choices = list("2012" = 2012,
+                                       "2013" = 2013,
+                                       "2014" = 2014,
+                                       "2015" = 2015,
+                                       "2016" = 2016),
+                        ##"All" = "All"),
+                        selected = 2012),
+            plotOutput("povertyPlot", width = "100%")
+          )
         )
-      ),
+      )
+    ),
   
       #tab5 Conclusion
       tabPanel(
