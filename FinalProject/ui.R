@@ -56,12 +56,9 @@ shinyUI(tagList(
             checkboxGroupInput("selectCounty", label = h3("Select County"),
                                choices = ListOfCounties$COUNTYNAME,
                                selected = ListOfCounties$COUNTYNAME),
-<<<<<<< HEAD
-            actionButton("UncheckCounty", label = "Check/Uncheck County", class = "btn-primary")
-=======
+
             actionButton("UncheckCounty", label = "Check/Uncheck County")
             
->>>>>>> Mengjiao
           ),
           # main panel
           mainPanel(

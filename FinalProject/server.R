@@ -17,11 +17,6 @@ shinyServer(
     # OUTPUT MAP FOR PANEL 3
     output$yearSalary <- renderPlot({
       RawData <- read.csv(paste0("Data/SOITaxData/", input$selectYear, ".csv"))
-<<<<<<< HEAD
-
-=======
->>>>>>> Mengjiao
-      
       filteredData <- RawData %>%
         dplyr::filter(STATE == "WA") %>%
         dplyr::filter(COUNTYNAME != "Washington") %>%
@@ -211,7 +206,7 @@ shinyServer(
       
       
       filteredPOVData <- wa_poverty_final_data %>% 
-          filter(Year == input$selectPovYear)
+          dplyr::filter(Year == input$selectPovYear)
      
 
       
