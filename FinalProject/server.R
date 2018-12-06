@@ -210,11 +210,11 @@ shinyServer(
       }
       filteredPOVData
     })
-
-    output$yearPOV <- renderPlot({
+      ## Create WA Poverty color map
+      output$yearPOV <- renderPlot({
       mapData <- readData()
 
-      ## Tidying up the map plot
+      ## Create map theme for tidying up the map plot
       ditch_the_axes <- theme(
         axis.text = element_blank(),
         axis.line = element_blank(),
@@ -228,7 +228,7 @@ shinyServer(
       palette2colors=function(name){
         brewer.pal(brewer.pal.info[rownames(brewer.pal.info)==name, "maxcolors"],name)}
 
-
+      ## Plot WA Poverty State ap. Tried to use Plotly but I couldn't get it correct
       ggplot(mapData, aes(long, lat, group = group, fill = Percent)) +
         geom_polygon(color = "#ffffff", size = 0.05) +
         coord_map(projection = "albers", lat0 = 39, lat1 = 45) +
@@ -238,15 +238,17 @@ shinyServer(
         theme(plot.title=element_text(size=32)) +
 
         labs(fill = "% Below Poverty Line") + theme_bw() + ditch_the_axes
-      ##scale_fill_gradientn(colours = terrain.colors(7))
     })
-
+    
+    ## Create data table to present data in text format. Allows user to search by County, Year, etc.
     output$povertyTable <-  DT::renderDataTable({
       wa_poverty_data <- read.csv("Data/PovertyData/wa_poverty_data.csv", stringsAsFactors = FALSE)
       wa_poverty_data <- wa_poverty_data %>% select(county_name, Percent, Year)
       data <- wa_poverty_data[, c("county_name", "Percent", "Year")]
       DT::datatable(data, options = list(lengthMenu = c(9, 17, 25), pageLength = 9), rownames=FALSE)
     })
+    
+    ## Create reactive input by Year for the Diverging Bar plot
     readDataA <- reactive({
       wa_poverty_data <- read.csv("Data/PovertyData/wa_poverty_data.csv", stringsAsFactors = FALSE)
       wa_poverty_data <- wa_poverty_data %>% dplyr::select(county_name, Percent, Year)
@@ -266,12 +268,14 @@ shinyServer(
       }
       filteredPOVData
     })
+    
+    ## Create diverging bar plot for WA Poverty data. Compute center of WA Poverty value and SD of the counties
     output$povertyPlot <- renderPlot({
       barData <- readDataA()
       barData$above_below_SD <- round((barData$Percent - mean(barData$Percent))/sd(barData$Percent), 2)
       barData$pov_type <- ifelse(barData$above_below_SD < 0, "above", "below")  # above / below avg flag
       barData$county_names <- barData$county_name
-      ggplot(barData, aes(x=county_names, y=barData$above_below_SD, label=above_below_SD)) +
+        ggplot(barData, aes(x=county_names, y=barData$above_below_SD, label=above_below_SD)) +
         geom_bar(stat='identity', aes(fill=pov_type), width=.5)  +
         scale_fill_manual(name="WA Poverty Avg Deviation ",
                           labels = c("Below Average", "Above Average"),
@@ -279,8 +283,9 @@ shinyServer(
         labs(subtitle="WA Poverty Visual",
              title= "Diverging Bars", caption = "Produced by Jim Griffin") +
         coord_flip()
+      
     })
-
+    ## End of Jim's Code
 
 
       #OUTPUT FOR TABPANEL 1 (COMPARE COUNTIES)
